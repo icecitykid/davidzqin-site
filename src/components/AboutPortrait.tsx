@@ -8,9 +8,9 @@ export function AboutPortrait() {
     <>
       <div className="dots" aria-hidden="true" />
       <div className="photo">
-        {/* Drop portrait at public/assets/david-portrait.jpg to populate */}
+        {/* Drop portrait at public/assets/david-portrait.png to populate */}
         <img
-          src="/assets/david-portrait.jpg"
+          src="/assets/david-portrait.png"
           alt="Portrait of David Qin"
           onError={(e) => {
             e.currentTarget.style.display = "none";
