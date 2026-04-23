@@ -55,7 +55,3 @@ npm run lint
 ```
 
 ## Notes
-
-- Portrait on `/about` expects `public/assets/david-portrait.jpg`; until it exists, the `<img>` hides itself on error and the circular frame shows the gradient empty state (same behavior as the static HTML).
-- **`public/og.png`** is a tiny placeholder; replace with a proper 1200×630 image for social previews.
-- Resume is served from **`public/assets/Zehao_Qin_2026_Resume.pdf`** (`RESUME_SRC` in `src/lib/constants.ts`). Replace that file and constant if you ship a newer PDF.
