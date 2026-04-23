@@ -73,7 +73,7 @@ export default function AboutPage() {
           </section>
         </main>
 
-        <Footer variant="about" />
+        <Footer />
       </div>
     </div>
   );

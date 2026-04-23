@@ -137,7 +137,7 @@ export default function HomePage() {
         </ScrollRevealWork>
       </section>
 
-      <Footer variant="home" />
+      <Footer />
     </div>
   );
 }

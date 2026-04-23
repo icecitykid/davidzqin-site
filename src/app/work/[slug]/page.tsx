@@ -64,7 +64,7 @@ export default async function WorkCasePage({ params }: Props) {
           .
         </p>
       </main>
-      <Footer variant="home" />
+      <Footer />
     </div>
   );
 }
