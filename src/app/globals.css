@@ -782,7 +782,7 @@ a {
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   overflow: hidden;
-  background: var(--dzq-bg-card);
+  background: transparent;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
