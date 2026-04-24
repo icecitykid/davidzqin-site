@@ -1,3 +1,7 @@
+import type { ComponentType } from "react";
+import { ArtAightBet } from "@/components/art/ArtAightBet";
+import { ArtAthleteHQ } from "@/components/art/ArtAthleteHQ";
+import { ArtShopify } from "@/components/art/ArtShopify";
 import { CASE_SLUGS, TITLES, type CaseSlug } from "./work";
 
 /**
@@ -33,6 +37,18 @@ export type CaseStudyLearning = {
   body?: string;
 };
 
+/** Content for the homepage CaseCard tied to this slug. */
+export type CaseStudyCard = {
+  /** Right-side meta line, e.g. "2024 · Nike Valiant Labs". */
+  year: string;
+  /** Right-aligned summary in the meta strip below the card. */
+  description: string;
+  /** Big headline shown in the hover overlay. */
+  overlayTitle: string;
+  /** Sub-line shown beneath the overlay headline. */
+  overlayDescription: string;
+};
+
 export type CaseStudy = {
   slug: CaseSlug;
   /** Inherited from `TITLES` in `./work.ts`; convenience for renderers. */
@@ -45,6 +61,8 @@ export type CaseStudy = {
   sections: CaseStudySection[];
   learnings: CaseStudyLearning[];
   team: string[];
+  /** Homepage CaseCard content. Edits here propagate to `/`. */
+  card: CaseStudyCard;
 };
 
 const EMPTY_MEDIA: CaseStudyMedia = { src: "", type: "image", alt: "" };
@@ -61,6 +79,15 @@ export const CASE_STUDIES: Record<CaseSlug, CaseStudy> = {
     sections: [],
     learnings: [],
     team: [],
+    card: {
+      year: "2024 · Nike Valiant Labs",
+      description:
+        "An athlete app for Nike athletes to tell their untold stories + a real-time database to match them to the right Nike moment.",
+      overlayTitle:
+        "An athlete app for Nike athletes to tell their untold stories.",
+      overlayDescription:
+        "Plus a real-time database that matches them to the right Nike moment.",
+    },
   },
   aightbet: {
     slug: "aightbet",
@@ -73,6 +100,15 @@ export const CASE_STUDIES: Record<CaseSlug, CaseStudy> = {
     sections: [],
     learnings: [],
     team: [],
+    card: {
+      year: "2025 · Vibe Coded",
+      description:
+        "A social betting app that turns casual trash talk into structured bets with real outcomes.",
+      overlayTitle:
+        "Turn casual trash talk into structured bets with real outcomes.",
+      overlayDescription:
+        "A social betting app for friends. Built solo on weekends.",
+    },
   },
   shopify: {
     slug: "shopify",
@@ -85,7 +121,26 @@ export const CASE_STUDIES: Record<CaseSlug, CaseStudy> = {
     sections: [],
     learnings: [],
     team: [],
+    card: {
+      year: "2022 · Shopify",
+      description:
+        "Redesign for Shopify Logistics’ warehouse robot configuration tool.",
+      overlayTitle: "Warehouse robot configuration, redesigned.",
+      overlayDescription:
+        "Turning a dense engineer-only tool into something ops teams could run without fear.",
+    },
   },
+};
+
+/**
+ * Slug → art component for the homepage CaseCard. Kept separate from
+ * `CASE_STUDIES` so the data record stays serialisable; consumers render
+ * with `<Art />` to instantiate fresh per card.
+ */
+export const CASE_ART: Record<CaseSlug, ComponentType> = {
+  athletehq: ArtAthleteHQ,
+  aightbet: ArtAightBet,
+  shopify: ArtShopify,
 };
 
 /**

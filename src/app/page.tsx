@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArtAightBet } from "@/components/art/ArtAightBet";
-import { ArtAthleteHQ } from "@/components/art/ArtAthleteHQ";
-import { ArtShopify } from "@/components/art/ArtShopify";
 import { CaseCard } from "@/components/CaseCard";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ScrollRevealWork } from "@/components/ScrollRevealWork";
+import { CASE_ART, listCaseStudies } from "@/lib/case-studies";
 import { workHref } from "@/lib/work";
 
 export const metadata: Metadata = {
@@ -104,36 +102,22 @@ export default function HomePage() {
         </div>
 
         <ScrollRevealWork>
-          <CaseCard
-            href={workHref("athletehq")}
-            ariaLabel="Nike AthleteHQ — read case study"
-            title="Nike AthleteHQ"
-            year="2024 · Nike Valiant Labs"
-            description="An athlete app for Nike athletes to tell their untold stories + a real-time database to match them to the right Nike moment."
-            overlayTitle="An athlete app for Nike athletes to tell their untold stories."
-            overlayDescription="Plus a real-time database that matches them to the right Nike moment."
-            art={<ArtAthleteHQ />}
-          />
-          <CaseCard
-            href={workHref("aightbet")}
-            ariaLabel="AightBet — read case study"
-            title="AightBet"
-            year="2025 · Vibe Coded"
-            description="A social betting app that turns casual trash talk into structured bets with real outcomes."
-            overlayTitle="Turn casual trash talk into structured bets with real outcomes."
-            overlayDescription="A social betting app for friends. Built solo on weekends."
-            art={<ArtAightBet />}
-          />
-          <CaseCard
-            href={workHref("shopify")}
-            ariaLabel="Shopify Logistics Configuration Manager — read case study"
-            title="Shopify Logistics Configuration Manager"
-            year="2022 · Shopify"
-            description="Redesign for Shopify Logistics’ warehouse robot configuration tool."
-            overlayTitle="Warehouse robot configuration, redesigned."
-            overlayDescription="Turning a dense engineer-only tool into something ops teams could run without fear."
-            art={<ArtShopify />}
-          />
+          {listCaseStudies().map((study) => {
+            const Art = CASE_ART[study.slug];
+            return (
+              <CaseCard
+                key={study.slug}
+                href={workHref(study.slug)}
+                ariaLabel={`${study.title} — read case study`}
+                title={study.title}
+                year={study.card.year}
+                description={study.card.description}
+                overlayTitle={study.card.overlayTitle}
+                overlayDescription={study.card.overlayDescription}
+                art={<Art />}
+              />
+            );
+          })}
         </ScrollRevealWork>
       </section>
 
