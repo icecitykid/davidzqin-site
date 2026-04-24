@@ -105,7 +105,7 @@ export default function HomePage() {
 
         <ScrollRevealWork>
           <CaseCard
-            href={workHref("nike-athletehq")}
+            href={workHref("athletehq")}
             ariaLabel="Nike AthleteHQ — read case study"
             title="Nike AthleteHQ"
             year="2024 · Nike Valiant Labs"
@@ -125,7 +125,7 @@ export default function HomePage() {
             art={<ArtAightBet />}
           />
           <CaseCard
-            href={workHref("shopify-logistics")}
+            href={workHref("shopify")}
             ariaLabel="Shopify Logistics Configuration Manager — read case study"
             title="Shopify Logistics Configuration Manager"
             year="2022 · Shopify"

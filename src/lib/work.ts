@@ -1,8 +1,4 @@
-export const CASE_SLUGS = [
-  "nike-athletehq",
-  "aightbet",
-  "shopify-logistics",
-] as const;
+export const CASE_SLUGS = ["athletehq", "aightbet", "shopify"] as const;
 
 export type CaseSlug = (typeof CASE_SLUGS)[number];
 
@@ -11,10 +7,10 @@ export function workHref(slug: CaseSlug): string {
   return `/work/${slug}`;
 }
 
-const TITLES: Record<CaseSlug, string> = {
-  "nike-athletehq": "Nike AthleteHQ",
+export const TITLES: Record<CaseSlug, string> = {
+  athletehq: "Nike AthleteHQ",
   aightbet: "AightBet",
-  "shopify-logistics": "Shopify Logistics Config Manager",
+  shopify: "Shopify Logistics Config Manager",
 };
 
 export function isCaseSlug(slug: string): slug is CaseSlug {
