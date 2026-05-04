@@ -78,7 +78,7 @@ export function StatBlock({
   return (
     <div className="flex flex-col gap-dzq-space-3">
       <p
-        className="m-0 font-dzq-display text-dzq-3xl font-dzq-medium leading-none tracking-tight text-dzq-fg-1 tabular-nums"
+        className="m-0 font-dzq-display text-[clamp(36px,5vw,48px)] font-dzq-bold leading-none tracking-tight text-dzq-fg-1 tabular-nums"
         aria-label={accessibleValue}
       >
         <span aria-hidden="true">
@@ -90,7 +90,7 @@ export function StatBlock({
       </p>
 
       <p
-        className={`m-0 text-dzq-md font-dzq-medium text-dzq-fg-2 transition-opacity duration-dzq-slow ease-dzq-out ${
+        className={`m-0 text-[clamp(18px,2vw,24px)] leading-snug text-[#334155] transition-opacity duration-dzq-slow ease-dzq-out ${
           descriptorVisible ? "opacity-100" : "opacity-0"
         }`}
       >

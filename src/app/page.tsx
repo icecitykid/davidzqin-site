@@ -46,7 +46,7 @@ export default function HomePage() {
             From athlete platforms at{" "}
             <span className="hero-inline">
               <Image
-                src="/assets/Nike%20logo.svg"
+                src="/assets/nike-logo.svg"
                 alt=""
                 width={35}
                 height={35}
@@ -59,7 +59,7 @@ export default function HomePage() {
             to internal tools at{" "}
             <span className="hero-inline">
               <Image
-                src="/assets/Shopify%20logo.svg"
+                src="/assets/shopify-logo.svg"
                 alt=""
                 width={32}
                 height={37}

@@ -5,20 +5,24 @@ import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
 export type ImmersiveStatementSectionProps = {
   id?: string;
-  /** Short headline (~3–6 words). */
+  /** Short headline (~3–6 words). Newlines stack as separate lines. */
   leftText: string;
   /** Longer explanation. Blank lines (\n\n) break paragraphs. */
   rightText: string;
-  /** Column split. Currently only "50/50" is supported. */
-  layout?: "50/50";
   className?: string;
 };
 
+/**
+ * Mirrors Figma statement frames (4138:1903, 4138:3194, 4138:3640):
+ * - Heading 36px medium black, fixed ≤411px wide
+ * - Body 24px regular #334155, max ≈716px
+ * - 128px gap between columns, centered horizontally on viewport
+ * - Heading newlines render as stacked lines.
+ */
 export function ImmersiveStatementSection({
   id,
   leftText,
   rightText,
-  layout = "50/50",
   className,
 }: ImmersiveStatementSectionProps) {
   const rootRef = useRef<HTMLElement>(null);
@@ -32,7 +36,6 @@ export function ImmersiveStatementSection({
         const yOffset = isMobile ? 16 : 32;
 
         const targets = [leftRef.current, rightRef.current];
-
         gsap.set(targets, { opacity: 0, y: yOffset });
 
         ScrollTrigger.create({
@@ -60,38 +63,40 @@ export function ImmersiveStatementSection({
     { scope: rootRef },
   );
 
-  const columnsClass = layout === "50/50" ? "md:grid-cols-2" : "md:grid-cols-2";
+  const headingLines = leftText.split("\n");
 
   return (
     <section
       ref={rootRef}
       id={id}
       className={[
-        "mx-auto w-full max-w-dzq-content px-dzq-space-6 py-dzq-space-10",
+        "mx-auto w-full max-w-[1410px] px-dzq-space-6 py-[clamp(80px,12vw,160px)]",
         className,
       ]
         .filter(Boolean)
         .join(" ")}
     >
-      <div
-        className={`grid grid-cols-1 items-start gap-dzq-space-10 ${columnsClass}`}
-      >
+      <div className="mx-auto flex w-full max-w-[1255px] flex-col items-start gap-dzq-space-9 md:flex-row md:items-start md:justify-center md:gap-[clamp(48px,9vw,128px)]">
         <h2
           ref={leftRef}
-          className="m-0 font-dzq-display text-dzq-2xl font-dzq-medium leading-tight tracking-tight text-dzq-fg-1 will-change-transform"
+          className="m-0 w-full font-dzq-display text-[clamp(28px,4vw,36px)] font-dzq-medium leading-tight tracking-tight text-dzq-fg-1 will-change-transform md:w-[411px] md:shrink-0"
         >
-          {leftText}
+          {headingLines.map((line, i) => (
+            <span key={i} className="block">
+              {line}
+            </span>
+          ))}
         </h2>
 
         <div
           ref={rightRef}
-          className="text-dzq-lg leading-snug text-dzq-fg-2 will-change-transform"
+          className="w-full text-[clamp(18px,2vw,24px)] leading-snug text-[#334155] will-change-transform md:max-w-[716px]"
         >
           {rightText
             .split(/\n{2,}/)
             .filter((p) => p.trim().length > 0)
             .map((paragraph, i) => (
-              <p key={i} className="m-0 mb-dzq-space-5 last:mb-0">
+              <p key={i} className="m-0 mb-[1em] last:mb-0">
                 {paragraph}
               </p>
             ))}

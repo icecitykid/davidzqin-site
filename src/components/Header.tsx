@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { LOGO_SRC } from "@/lib/constants";
 
-export type HeaderVariant = "home" | "about";
+export type HeaderVariant = "home" | "about" | "case";
 
 export function Header({ variant }: { variant: HeaderVariant }) {
   if (variant === "about") {
@@ -28,6 +28,20 @@ export function Header({ variant }: { variant: HeaderVariant }) {
           <Link href="/about" className="nav-link" aria-current="page">
             About
           </Link>
+        </nav>
+      </header>
+    );
+  }
+
+  if (variant === "case") {
+    return (
+      <header className="hdr hdr--home">
+        <Link href="/" className="brand" aria-label="Back to all projects">
+          <Image src={LOGO_SRC} alt="" width={30} height={40} unoptimized />
+          <div className="name">All Projects</div>
+        </Link>
+        <nav className="nav" aria-label="Primary">
+          <Link href="/about">About</Link>
         </nav>
       </header>
     );

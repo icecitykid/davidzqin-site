@@ -64,12 +64,13 @@ export default async function WorkCasePage({ params }: Props) {
   if (study.immersive) {
     return (
       <div className="page" id="top">
-        <Header variant="home" />
-        <AthleteHQImmersive layout={study.immersive} title={study.title} />
-        <main className="flex flex-col gap-dzq-space-10 pb-[140px]">
-          <CaseCredits team={study.team} />
-          <CaseNextProject currentSlug={study.slug} />
-        </main>
+        <Header variant="case" />
+        <AthleteHQImmersive
+          layout={study.immersive}
+          title={study.title}
+          slug={study.slug}
+        />
+        <div className="pb-[140px]" />
         <Footer />
       </div>
     );
