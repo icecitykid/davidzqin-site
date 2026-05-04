@@ -16,7 +16,10 @@ export function CaseNextProject({ currentSlug }: { currentSlug: CaseSlug }) {
   if (nextSlug === currentSlug) return null;
 
   return (
-    <section className="mx-auto w-full max-w-dzq-content border-t border-dzq-border pt-dzq-space-7">
+    <section
+      id="next-project"
+      className="mx-auto w-full max-w-dzq-content border-t border-dzq-border pt-dzq-space-7"
+    >
       <Link
         href={workHref(nextSlug)}
         className="group flex items-baseline justify-between gap-dzq-space-5"
