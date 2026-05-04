@@ -26,14 +26,17 @@ export function ImmersiveNextProject({ currentSlug, next }: Props) {
   return (
     <section
       id="next-project"
-      className="mx-auto w-full max-w-dzq-content px-dzq-space-6 py-dzq-space-10"
+      className="w-full bg-black"
+      style={{
+        paddingBlock: "calc(var(--dzq-space-10) + 150px)",
+      }}
     >
       <Link
         href={workHref(nextSlug)}
         aria-label={`Next project: ${next.logoAlt}`}
-        className="group flex flex-col items-center gap-dzq-space-7 text-center"
+        className="group mx-auto flex w-full max-w-dzq-content flex-col items-center gap-dzq-space-7 px-dzq-space-6 text-center"
       >
-        <p className="m-0 text-[18px] font-dzq-medium leading-none text-[#64748B]">
+        <p className="m-0 text-[18px] font-dzq-medium leading-none text-slate-400">
           {next.eyebrow ?? "Next project"}
         </p>
         <Image

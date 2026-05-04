@@ -162,15 +162,15 @@ export function AthleteHQImmersive({ layout, title, slug }: Props) {
       <ImmersiveStickyNav sections={layout.nav} />
 
       {/* Full-bleed wrapper that breaks out of `.page`'s 40px padding. */}
-      <div className="relative left-1/2 w-screen max-w-none -translate-x-1/2 bg-dzq-bg">
+      <div className="relative left-1/2 w-screen max-w-none -translate-x-1/2 bg-slate-100">
         <section
           ref={heroRef}
           id="hero"
-          className="relative h-screen w-full overflow-hidden bg-dzq-bg-dark"
+          className="relative h-screen w-full overflow-hidden bg-slate-100"
         >
           <div
             ref={heroBgRef}
-            className="absolute inset-x-0 top-0 h-[130%] will-change-transform"
+            className="absolute inset-0 will-change-transform"
           >
             <Image
               src={layout.hero.backgroundSrc}

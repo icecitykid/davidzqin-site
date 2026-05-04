@@ -58,7 +58,7 @@ export function ImmersiveStickyNav({ sections }: Props) {
       "relative block py-dzq-space-2 text-dzq-base font-dzq-medium transition-colors duration-300 ease-out after:absolute after:bottom-0 after:left-0 after:h-px after:bg-current after:transition-[right] after:duration-300 after:ease-out";
     const color = isActive
       ? "text-dzq-fg-1"
-      : "text-dzq-fg-muted hover:text-dzq-fg-1";
+      : "text-slate-400 hover:text-dzq-fg-1";
     const bar = isActive ? "after:right-0" : "after:right-full";
     return `${base} ${color} ${bar}`;
   };
@@ -67,7 +67,7 @@ export function ImmersiveStickyNav({ sections }: Props) {
     <nav
       aria-label="Case study sections"
       aria-hidden={hidden ? "true" : undefined}
-      className={`fixed bottom-[max(1.5rem,env(safe-area-inset-bottom,0px))] left-1/2 z-[50] w-[min(877px,calc(100vw-32px))] rounded-dzq-radius-lg bg-white px-dzq-space-8 py-dzq-space-4 shadow-[0_4px_17px_rgba(0,0,0,0.1)] transition-[opacity,transform] duration-500 ease-out motion-reduce:transition-none ${
+      className={`fixed bottom-[max(1.5rem,env(safe-area-inset-bottom,0px))] left-1/2 z-[50] w-[min(577px,calc(100vw-32px))] rounded-dzq-radius-lg bg-white px-dzq-space-8 py-dzq-space-4 shadow-[0_4px_17px_rgba(0,0,0,0.1)] transition-[opacity,transform] duration-500 ease-out motion-reduce:transition-none ${
         hidden ? "pointer-events-none opacity-0" : "opacity-100"
       }`}
       style={{

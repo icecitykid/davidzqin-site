@@ -255,7 +255,8 @@ a {
 .page {
   max-width: 1536px;
   margin: 0 auto;
-  padding: 28px 40px 64px;
+  /* Top/bottom match; footer already has its own bottom padding */
+  padding: 28px 40px;
 }
 
 .hdr {
@@ -265,7 +266,8 @@ a {
   padding: 14px 0 18px;
 }
 
-.hdr--home {
+.hdr--home,
+.hdr--about {
   position: sticky;
   top: 0;
   z-index: 40;
@@ -273,53 +275,70 @@ a {
 }
 
 /* Header sits inside `.page` padding; bleed bg to viewport edges of the page shell */
-.page > .hdr--home {
+.page > .hdr--home,
+.about-root .page > .hdr--about {
   margin-inline: -40px;
   padding-inline: 40px;
 }
 
 /* Immersive case study: hero flush to top; fixed header overlays hero image */
-.page--immersive-case {
+.page.page--immersive-case {
   padding-top: 0;
+  /* No bottom page padding — avoids slate/white strip under the black footer */
+  padding-bottom: 0;
 }
 
 .immersive-case__shell {
   position: relative;
 }
 
+/**
+ * Fixed bar spans the viewport; inner header matches `.page` width (1536px).
+ * Home stacks `.page { padding-top: 28px }` then `.hdr { padding: 14px 0 18px }`
+ * before the logo — immersive pages zero out page top padding so the hero
+ * can go flush, so we restore that **page** inset here (`padding-top: 28px`,
+ * `20px` below 900px) plus the same `.hdr` insets as home.
+ */
 .immersive-case__header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 60;
-  box-sizing: border-box;
-  width: 100%;
-  padding: 0 40px;
+  display: flex;
+  justify-content: center;
+  padding: 28px 0 0;
   pointer-events: none;
 }
 
 .immersive-case__header .hdr--case {
   pointer-events: auto;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1536px;
+  margin: 0 auto;
+  padding: 14px 40px 18px;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 900px) {
   .immersive-case__header {
-    padding: 0 20px;
+    padding-top: 20px;
+  }
+
+  .immersive-case__header .hdr--case {
+    padding: 14px 20px 18px;
   }
 }
 
 /**
- * Case-study header: same padding rhythm and type scale as the home `.hdr`
- * (18px primary / 16px nav). Transparent — no fill — over the hero; white
- * type. After the hero scrolls off, `HeaderCase` adds `.hdr--case--on-light`
- * for ink text on white sections.
+ * Case-study header: same type scale as the home `.hdr` (18px primary / 16px
+ * nav). Transparent over the hero; white type. After the hero scrolls off,
+ * `HeaderCase` adds `.hdr--case--on-light` for ink on light sections.
  */
 .hdr--case {
   position: relative;
   background: transparent;
   color: #ffffff;
-  padding: 14px 0 18px;
 }
 
 .hdr--case--on-light {
@@ -695,11 +714,14 @@ a {
 
 .ftr {
   margin-top: 140px;
+  /* Top: breathing room above rule; bottom: mirrors viewport→header text (.page top + .hdr top) */
   padding-top: 32px;
+  padding-bottom: calc(28px + 14px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid var(--dzq-border);
+  background: transparent;
   font-size: 15px;
   font-weight: 500;
 }
@@ -724,6 +746,7 @@ a {
 .ftr .right a {
   position: relative;
   padding: 2px 0;
+  color: var(--dzq-fg-1);
 }
 
 .ftr .right a::after {
@@ -739,6 +762,28 @@ a {
 
 .ftr .right a:hover::after {
   right: 0;
+}
+
+/* Nike AthleteHQ immersive only: black bar under Next project */
+.ftr.ftr--immersive-end {
+  margin-top: 0;
+  padding-top: 32px;
+  padding-bottom: calc(28px + 14px);
+  background: #000000;
+  border-top-color: rgba(255, 255, 255, 0.12);
+  color: #f1f5f9;
+}
+
+.ftr.ftr--immersive-end .left {
+  color: #f1f5f9;
+}
+
+.ftr.ftr--immersive-end .left img {
+  filter: brightness(0) invert(1);
+}
+
+.ftr.ftr--immersive-end .right a {
+  color: #f1f5f9;
 }
 
 .case {
@@ -773,24 +818,17 @@ a {
   flex: 1;
 }
 
-.about-root .hdr {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 4px 0 8px;
-}
-
-.about-root .hdr a {
-  font-weight: 500;
-  font-size: 16px;
-}
-
 .about-root .back {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   position: relative;
   padding: 2px 0;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: -0.005em;
+  color: inherit;
 }
 
 .about-root .back svg {
@@ -801,11 +839,11 @@ a {
   transform: translateX(-4px);
 }
 
-.about-root .back::after,
-.about-root .nav-link::after {
+/* Skip the arrow for the underline: 22px icon + 14px gap (case header back row) */
+.about-root .back::after {
   content: "";
   position: absolute;
-  left: 0;
+  left: 36px;
   right: 100%;
   bottom: -2px;
   height: 1px;
@@ -813,18 +851,8 @@ a {
   transition: right 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.about-root .back::after {
-  left: 34px;
-}
-
-.about-root .back:hover::after,
-.about-root .nav-link:hover::after {
+.about-root .back:hover::after {
   right: 0;
-}
-
-.about-root .nav-link {
-  position: relative;
-  padding: 2px 0;
 }
 
 .about-root main {
@@ -1154,10 +1182,17 @@ a {
 
 @media (max-width: 900px) {
   .page {
-    padding: 20px 20px 48px;
+    padding: 20px;
   }
 
-  .page > .hdr--home {
+  /* `.page { padding: … }` shorthand resets padding-top — keep hero flush */
+  .page.page--immersive-case {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .page > .hdr--home,
+  .about-root .page > .hdr--about {
     margin-inline: -20px;
     padding-inline: 20px;
   }
@@ -1227,6 +1262,12 @@ a {
     flex-direction: column;
     gap: 16px;
     align-items: flex-start;
+    /* Matches `.page` top (20px) + `.hdr` top padding (14px) below 900px */
+    padding-bottom: calc(20px + 14px);
+  }
+
+  .ftr.ftr--immersive-end {
+    padding-bottom: calc(20px + 14px);
   }
 
   .ftr .right {

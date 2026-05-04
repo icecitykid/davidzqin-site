@@ -253,9 +253,9 @@ export const CASE_STUDIES: Record<CaseSlug, CaseStudy> = {
         title:
           "Building Nike Sport Marketing’s first system for knowing its athletes.",
         // Figma deliberately splits the body into two paragraphs.
-        subtitle: `Nike signs 10,000 athletes but only meaningfully engages 5% of them. Sports Marketing was running a 20-year-old process of phone calls and spreadsheets with no real-time data, no way to match athletes to opportunities, and no direct line to the athletes themselves.
+        subtitle: `Nike signs 10,000 athletes but only meaningfully engages 5% of them. Sports Marketing was running a 20-year-old process of phone calls and spreadsheets with no real-time data.
 
-I led end-to-end designs on a new system — an athlete-facing mobile app, an internal web and mobile portal for Sports Marketing, and the long-term vision for a consumer product. The MVP shipped during the 2024 Track and Field World Championships.`,
+I led end-to-end designs on a new system — an athlete-facing mobile app, an internal web and mobile portal for Sports Marketing. The MVP shipped during the 2024 Track and Field World Championships.`,
         role: [
           "Product Design",
           "Prototyping",

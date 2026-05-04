@@ -8,7 +8,7 @@ export type HeaderVariant = "home" | "about" | "case";
 export function Header({ variant }: { variant: HeaderVariant }) {
   if (variant === "about") {
     return (
-      <header className="hdr">
+      <header className="hdr hdr--about">
         <Link href="/" className="back" aria-label="Back to selected work">
           <svg
             width="22"
@@ -25,8 +25,8 @@ export function Header({ variant }: { variant: HeaderVariant }) {
           </svg>
           Selected Work
         </Link>
-        <nav aria-label="Primary">
-          <Link href="/about" className="nav-link" aria-current="page">
+        <nav className="nav" aria-label="Primary">
+          <Link href="/about" aria-current="page">
             About
           </Link>
         </nav>
