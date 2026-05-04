@@ -41,7 +41,7 @@ export function ImmersiveStats({ id, stats }: Props) {
     <section
       ref={sectionRef}
       id={id}
-      className="mx-auto w-full max-w-[1334px] scroll-mt-[72px] px-dzq-space-6 py-[clamp(80px,10vw,160px)]"
+      className="mx-auto w-full max-w-[1334px] scroll-mt-[72px] p-[50px] md:py-[clamp(80px,10vw,160px)]"
     >
       <div className="flex flex-col gap-[clamp(64px,10vw,150px)]">
         <div className="grid grid-cols-1 items-start gap-dzq-space-9 md:grid-cols-[minmax(0,323fr)_minmax(0,887fr)] md:gap-[clamp(48px,9vw,124px)]">

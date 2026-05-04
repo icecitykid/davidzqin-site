@@ -99,6 +99,21 @@ export type CaseStudyImmersiveScene =
       readonly media: CaseStudyImmersiveMedia;
       readonly captionTitle?: string;
       readonly captionBody?: string;
+    }
+  | {
+      /**
+       * Mirrors Figma `Group 613` (4136:4065) — a full-width dark deck-style
+       * panel with a single Nike-app phone mockup centered over it. Used for
+       * the AthleteHQ Phase 2 vision section.
+       */
+      readonly kind: "phase-2-vision";
+      readonly id?: string;
+      readonly phoneSrc: string;
+      readonly phoneAlt: string;
+      /** Optional eyebrow / headline / quote rendered on top of the phone. */
+      readonly eyebrow?: string;
+      readonly headline?: string;
+      readonly quote?: string;
     };
 
 export type CaseStudyImmersiveStat = {
@@ -224,7 +239,7 @@ export const CASE_STUDIES: Record<CaseSlug, CaseStudy> = {
         { id: "results", label: "Results" },
       ],
       hero: {
-        backgroundSrc: "/assets/work/athletehq-landing.png",
+        backgroundSrc: "/assets/davidzqin.com/full-bleed-hero.png",
         backgroundAlt: "",
         logoSrc: "/assets/davidzqin.com/ahq-graphic-logo-2.png",
         logoAlt: "AthleteHQ logo",
@@ -357,13 +372,14 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
             "Beyond MVP, I worked with another Senior Designer to help envision what athlete-led commerce could look like — athlete picks, personal stories, and fundraisers stitched into the shopping experience. It gave Sports Marketing a north star to point engineering and leadership toward.",
         },
         {
-          kind: "full-bleed-desktop",
+          kind: "phase-2-vision",
           id: "scene-vision",
-          media: {
-            src: "/assets/davidzqin.com/athletehq-phase-2-vision.png",
-            type: "image",
-            alt: "Athlete HQ Phase 2 vision — athlete-led commerce concept",
-          },
+          phoneSrc: "/assets/davidzqin.com/nike-app-onboarding-1.png",
+          phoneAlt: "AthleteHQ Phase 2 — athlete-led commerce concept",
+          eyebrow: "Runner",
+          headline: "Raevyn Rogers",
+          quote:
+            "There's power in knowing what you're capable of and peace when you channel it. So we keep smiling.",
         },
         {
           kind: "phone-row",

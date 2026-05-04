@@ -23,7 +23,7 @@ export function ImmersiveIntro({ id, intro }: Props) {
   return (
     <section
       id={id}
-      className="mx-auto w-full max-w-[1410px] scroll-mt-[72px] px-dzq-space-6 py-[clamp(80px,12vw,249px)]"
+      className="mx-auto w-full max-w-[1410px] scroll-mt-[72px] p-[50px] md:py-[clamp(80px,12vw,249px)]"
     >
       <div className="grid grid-cols-1 items-start gap-dzq-space-9 md:grid-cols-[minmax(0,1000fr)_minmax(180px,197fr)] md:gap-[clamp(48px,12vw,205px)]">
         <div className="flex flex-col gap-[clamp(40px,6vw,128px)]">

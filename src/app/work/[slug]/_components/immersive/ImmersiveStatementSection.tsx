@@ -70,7 +70,7 @@ export function ImmersiveStatementSection({
       ref={rootRef}
       id={id}
       className={[
-        "mx-auto w-full max-w-[1410px] px-dzq-space-6 py-[clamp(80px,12vw,160px)]",
+        "mx-auto w-full max-w-[1410px] p-[50px] md:py-[clamp(80px,12vw,160px)]",
         className,
       ]
         .filter(Boolean)

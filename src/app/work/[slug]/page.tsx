@@ -63,13 +63,17 @@ export default async function WorkCasePage({ params }: Props) {
 
   if (study.immersive) {
     return (
-      <div className="page" id="top">
-        <Header variant="case" />
-        <AthleteHQImmersive
-          layout={study.immersive}
-          title={study.title}
-          slug={study.slug}
-        />
+      <div className="page page--immersive-case" id="top">
+        <div className="immersive-case__shell">
+          <div className="immersive-case__header">
+            <Header variant="case" />
+          </div>
+          <AthleteHQImmersive
+            layout={study.immersive}
+            title={study.title}
+            slug={study.slug}
+          />
+        </div>
         <div className="pb-[140px]" />
         <Footer />
       </div>

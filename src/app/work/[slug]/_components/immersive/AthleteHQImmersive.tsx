@@ -80,6 +80,50 @@ function SceneRenderer({ scene }: { scene: CaseStudyImmersiveScene }) {
           </div>
         </section>
       );
+    case "phase-2-vision":
+      return (
+        <section
+          id={scene.id}
+          className="relative w-full scroll-mt-[72px] py-dzq-space-9"
+        >
+          <div
+            className="relative w-full overflow-hidden bg-[#0c0c0c]"
+            style={{ aspectRatio: "1920 / 1080" }}
+          >
+            <div
+              className="absolute left-1/2 top-1/2 flex w-[clamp(280px,28vw,410px)] -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-[36px]"
+              style={{ aspectRatio: "410 / 888" }}
+            >
+              <Image
+                src={scene.phoneSrc}
+                alt={scene.phoneAlt}
+                fill
+                sizes="(max-width: 768px) 60vw, 410px"
+                className="object-cover"
+              />
+              {(scene.eyebrow || scene.headline || scene.quote) && (
+                <div className="absolute inset-x-[6.4%] bottom-[6.4%] flex flex-col gap-[clamp(8px,1vw,12px)] text-white">
+                  {scene.eyebrow && (
+                    <p className="m-0 text-[16px] font-dzq-medium leading-[1.5]">
+                      {scene.eyebrow}
+                    </p>
+                  )}
+                  {scene.headline && (
+                    <p className="m-0 text-[24px] font-dzq-medium leading-[1.2]">
+                      {scene.headline}
+                    </p>
+                  )}
+                  {scene.quote && (
+                    <p className="m-0 text-[16px] font-dzq-regular leading-[1.4] text-[#B2B2B2]">
+                      {scene.quote}
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      );
   }
 }
 
@@ -134,9 +178,9 @@ export function AthleteHQImmersive({ layout, title, slug }: Props) {
               fill
               priority
               sizes="100vw"
-              className="object-cover"
+              className="object-cover object-center"
             />
-            <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
+            <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
           </div>
 
           <div

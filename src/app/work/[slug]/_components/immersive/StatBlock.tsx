@@ -78,7 +78,7 @@ export function StatBlock({
   return (
     <div className="flex flex-col gap-dzq-space-3">
       <p
-        className="m-0 font-dzq-display text-[clamp(36px,5vw,48px)] font-dzq-bold leading-none tracking-tight text-dzq-fg-1 tabular-nums"
+        className="m-0 font-dzq-display text-[clamp(36px,5vw,48px)] font-semibold leading-none tracking-tight text-dzq-fg-1 tabular-nums"
         aria-label={accessibleValue}
       >
         <span aria-hidden="true">
