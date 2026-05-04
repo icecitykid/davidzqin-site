@@ -63,10 +63,11 @@ export default function AboutPage() {
                   in systems, collaborate deeply with fellow builders, and optimize
                   for products that hold up under real-world constraints.
                 </p>
+                <p>Previously at Nike and Shopify.</p>
                 <p>
-                  Previously at Nike and Shopify. Currently exploring how AI changes
-                  the way products are designed and built. The line between design,
-                  engineering, and product is blurring — I&apos;m bullish for it.
+                  Currently exploring how AI changes the way products are designed and
+                  built. The line between design, engineering, and product is blurring
+                  and I&apos;m bullish for it.
                 </p>
               </div>
             </div>
