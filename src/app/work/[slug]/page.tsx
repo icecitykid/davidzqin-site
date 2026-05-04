@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
@@ -12,6 +13,12 @@ import { CaseLearnings } from "./_components/CaseLearnings";
 import { CaseNextProject } from "./_components/CaseNextProject";
 import { CaseSection } from "./_components/CaseSection";
 import { CaseStickyNav } from "./_components/CaseStickyNav";
+
+const AthleteHQImmersive = dynamic(() =>
+  import("./_components/immersive/AthleteHQImmersive").then(
+    (m) => m.AthleteHQImmersive,
+  ),
+);
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -53,6 +60,20 @@ export default async function WorkCasePage({ params }: Props) {
   if (!isCaseSlug(slug)) notFound();
 
   const study = getCaseStudy(slug);
+
+  if (study.immersive) {
+    return (
+      <div className="page" id="top">
+        <Header variant="home" />
+        <AthleteHQImmersive layout={study.immersive} title={study.title} />
+        <main className="flex flex-col gap-dzq-space-10 pb-[140px]">
+          <CaseCredits team={study.team} />
+          <CaseNextProject currentSlug={study.slug} />
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="page" id="top">

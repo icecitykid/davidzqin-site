@@ -272,6 +272,12 @@ a {
   background: var(--dzq-bg);
 }
 
+/* Header sits inside `.page` padding; bleed bg to viewport edges of the page shell */
+.page > .hdr--home {
+  margin-inline: -40px;
+  padding-inline: 40px;
+}
+
 .brand {
   display: flex;
   align-items: center;
@@ -1053,6 +1059,11 @@ a {
 @media (max-width: 900px) {
   .page {
     padding: 20px 20px 48px;
+  }
+
+  .page > .hdr--home {
+    margin-inline: -20px;
+    padding-inline: 20px;
   }
 
   .hero {

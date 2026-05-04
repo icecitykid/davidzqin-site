@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
 
@@ -21,8 +21,8 @@ export type StatBlockProps = {
 export function StatBlock({
   endValue,
   decimals = 0,
-  prefix = '',
-  suffix = '',
+  prefix = "",
+  suffix = "",
   trailingText,
   descriptor,
   duration = 1500,
@@ -39,7 +39,7 @@ export function StatBlock({
     startedRef.current = true;
 
     const reduceMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
+      "(prefers-reduced-motion: reduce)",
     ).matches;
 
     if (reduceMotion) {
@@ -72,7 +72,7 @@ export function StatBlock({
 
   const formatted = displayValue.toFixed(decimals);
   const accessibleValue = `${prefix}${endValue.toFixed(decimals)}${suffix}${
-    trailingText ? ` ${trailingText}` : ''
+    trailingText ? ` ${trailingText}` : ""
   }`;
 
   return (
@@ -91,7 +91,7 @@ export function StatBlock({
 
       <p
         className={`m-0 text-dzq-md font-dzq-medium text-dzq-fg-2 transition-opacity duration-dzq-slow ease-dzq-out ${
-          descriptorVisible ? 'opacity-100' : 'opacity-0'
+          descriptorVisible ? "opacity-100" : "opacity-0"
         }`}
       >
         {descriptor}
