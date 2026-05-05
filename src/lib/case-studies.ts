@@ -41,12 +41,8 @@ export type CaseStudyLearning = {
 export type CaseStudyCard = {
   /** Right-side meta line, e.g. "2024 · Nike Valiant Labs". */
   year: string;
-  /** Right-aligned summary in the meta strip below the card. */
+  /** Summary below title + year on the home card. */
   description: string;
-  /** Big headline shown in the hover overlay. */
-  overlayTitle: string;
-  /** Sub-line shown beneath the overlay headline. */
-  overlayDescription: string;
 };
 
 /** Sticky nav item for the GSAP "immersive" case layout. */
@@ -227,10 +223,6 @@ export const CASE_STUDIES: Record<CaseSlug, CaseStudy> = {
       year: "2024 · Nike Valiant Labs",
       description:
         "An athlete app for Nike athletes to tell their untold stories + a real-time database to match them to the right Nike moment.",
-      overlayTitle:
-        "An athlete app for Nike athletes to tell their untold stories.",
-      overlayDescription:
-        "Plus a real-time database that matches them to the right Nike moment.",
     },
     immersive: {
       nav: [
@@ -471,10 +463,6 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
       year: "2025 · Vibe Coded",
       description:
         "A social betting app that turns casual trash talk into structured bets with real outcomes.",
-      overlayTitle:
-        "Turn casual trash talk into structured bets with real outcomes.",
-      overlayDescription:
-        "A social betting app for friends. Built solo on weekends.",
     },
   },
   shopify: {
@@ -492,9 +480,6 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
       year: "2022 · Shopify",
       description:
         "Redesign for Shopify Logistics’ warehouse robot configuration tool.",
-      overlayTitle: "Warehouse robot configuration, redesigned.",
-      overlayDescription:
-        "Turning a dense engineer-only tool into something ops teams could run without fear.",
     },
   },
 };

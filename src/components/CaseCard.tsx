@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { CaseStudyChipIcon } from "@/components/CaseStudyChipIcon";
 
 export type CaseCardProps = {
   href: string;
@@ -8,17 +7,13 @@ export type CaseCardProps = {
   title: string;
   year: string;
   description: string;
-  overlayTitle: string;
-  overlayDescription: string;
   /** Absolutely-positioned composition that fills the card background */
   art: ReactNode;
 };
 
 /**
- * Home-page case study card (initial Next.js port from the static HTML).
- * `.case` panel with a `.frame` art wrapper, hover overlay + "Read case study"
- * chip, and a two-column `.meta` row (title + year on the left, description
- * right-aligned). Scroll-reveal via `data-scroll-reveal` (see `useScrollReveal`).
+ * Home-page case study card: `.frame` art + hover gradient scrim (no overlay copy),
+ * `.meta` below (title + year, then description).
  */
 export function CaseCard({
   href,
@@ -26,8 +21,6 @@ export function CaseCard({
   title,
   year,
   description,
-  overlayTitle,
-  overlayDescription,
   art,
 }: CaseCardProps) {
   return (
@@ -39,16 +32,7 @@ export function CaseCard({
     >
       <div className="frame">
         <div className="art">{art}</div>
-        <div className="overlay">
-          <div className="copy">
-            <div className="t">{overlayTitle}</div>
-            <div className="d">{overlayDescription}</div>
-            <div className="chip">
-              <CaseStudyChipIcon />
-              Read case study
-            </div>
-          </div>
-        </div>
+        <div className="overlay" aria-hidden="true" />
       </div>
       <div className="meta">
         <div className="left">

@@ -606,9 +606,8 @@ a {
 .case .overlay {
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: flex-end;
-  padding: 40px 44px;
+  z-index: 1;
+  pointer-events: none;
   background: linear-gradient(
     to top,
     rgba(0, 0, 0, 0.58) 0%,
@@ -617,50 +616,11 @@ a {
   );
   opacity: 0;
   transition: opacity 320ms cubic-bezier(0.22, 1, 0.36, 1);
-  pointer-events: none;
-}
-
-.case .overlay .copy {
-  color: white;
-  max-width: 720px;
-  transform: translateY(12px);
-  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.case .overlay .copy .t {
-  font-weight: 500;
-  font-size: 26px;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-}
-
-.case .overlay .copy .d {
-  margin-top: 8px;
-  font-size: 16px;
-  line-height: 1.4;
-  opacity: 0.85;
-}
-
-.case .overlay .copy .chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 4px 10px;
-  margin-top: 16px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  font-size: 12px;
-  font-weight: 500;
 }
 
 .case:hover .overlay,
 .case:focus-visible .overlay {
   opacity: 1;
-}
-
-.case:hover .overlay .copy,
-.case:focus-visible .overlay .copy {
-  transform: translateY(0);
 }
 
 .case:focus-visible {
@@ -670,10 +630,10 @@ a {
 
 .case .meta {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
   padding: 20px 28px 24px;
-  gap: 40px;
 }
 
 .case .meta .left {
@@ -697,9 +657,10 @@ a {
 
 .case .meta .d {
   font-size: 15px;
+  line-height: 1.45;
   color: var(--dzq-fg-2);
-  max-width: 54ch;
-  text-align: right;
+  max-width: 72ch;
+  text-align: left;
 }
 
 .art {
@@ -709,6 +670,7 @@ a {
   align-items: center;
   justify-content: center;
   position: relative;
+  z-index: 0;
   overflow: hidden;
   transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -1208,20 +1170,11 @@ a {
   }
 
   .case .meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
     padding: 18px 20px 22px;
+    gap: 8px;
   }
 
-  .case .meta .d {
-    text-align: left;
-  }
-
-  .nav {
-    gap: 20px;
-  }
-
+  /* Touch / narrow: keep bottom scrim visible (matches prior overlay-on-mobile behavior) */
   .case .overlay {
     opacity: 1;
     background: linear-gradient(
@@ -1232,8 +1185,8 @@ a {
     );
   }
 
-  .case .overlay .copy {
-    transform: none;
+  .nav {
+    gap: 20px;
   }
 
   .about-root .page {

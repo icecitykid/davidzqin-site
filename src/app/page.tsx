@@ -112,8 +112,6 @@ export default function HomePage() {
                 title={study.title}
                 year={study.card.year}
                 description={study.card.description}
-                overlayTitle={study.card.overlayTitle}
-                overlayDescription={study.card.overlayDescription}
                 art={<Art />}
               />
             );
