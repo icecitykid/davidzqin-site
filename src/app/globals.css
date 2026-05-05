@@ -101,6 +101,11 @@
  * Base (colors_and_type + index/about body)
  * ═══════════════════════════════════════════════════════════ */
 
+/* Reserve scrollbar width so centered headers align on short pages (e.g. About) vs scrolling Home */
+html {
+  scrollbar-gutter: stable;
+}
+
 html,
 body {
   margin: 0;
@@ -812,7 +817,8 @@ a {
   max-width: 1536px;
   margin: 0 auto;
   width: 100%;
-  padding: 28px 40px 32px;
+  /* Match base `.page` padding so About header lines up with Home */
+  padding: 28px 40px;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -1231,7 +1237,7 @@ a {
   }
 
   .about-root .page {
-    padding: 20px 20px 24px;
+    padding: 20px;
   }
 
   .about-root main {
