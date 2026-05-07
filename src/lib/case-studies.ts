@@ -300,21 +300,24 @@ I led end-to-end designs on a new system — an athlete-facing mobile app, an in
           kind: "phone-row",
           id: "phone-trio",
           aspect: "440/872",
+          // Order matches Figma 4138:1872 (Landing → Interstitial-3 →
+          // Interstitial-1-1). Updated 2026-05 alongside re-exports of all
+          // three screens.
           media: [
             {
               src: "/assets/davidzqin.com/landing-screen-1.png",
               type: "image",
-              alt: "AthleteHQ landing screen",
-            },
-            {
-              src: "/assets/davidzqin.com/2-profile-interstitial-1-1.png",
-              type: "image",
-              alt: "Athlete profile interstitial — interests",
+              alt: "AthleteHQ landing screen — Good Morning, Raevyn",
             },
             {
               src: "/assets/davidzqin.com/2-profile-interstitial-3.png",
               type: "image",
-              alt: "Athlete profile interstitial — identity",
+              alt: "Athlete profile interstitial — Raevyn's Picks",
+            },
+            {
+              src: "/assets/davidzqin.com/2-profile-interstitial-1-1.png",
+              type: "image",
+              alt: "Athlete profile interstitial — Concierge milestones",
             },
           ],
         },
