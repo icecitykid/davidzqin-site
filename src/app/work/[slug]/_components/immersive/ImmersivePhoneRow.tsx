@@ -71,13 +71,23 @@ export function ImmersivePhoneRow({ id, aspect = "440/872", media }: Props) {
     { scope: sectionRef, dependencies: [media] },
   );
 
-  // Map item count → desktop column count.
-  const colsClass =
-    media.length >= 4
+  // Map item count → desktop column count. Single-item rows render
+  // centered at a constrained width so a lone phone (e.g. an embedded
+  // video walkthrough) doesn't stretch into the empty thirds beside it.
+  const isSingle = media.length === 1;
+  const colsClass = isSingle
+    ? "md:grid-cols-1"
+    : media.length >= 4
       ? "md:grid-cols-2 lg:grid-cols-4"
       : media.length === 2
         ? "md:grid-cols-2"
         : "md:grid-cols-3";
+  const gridClass = isSingle
+    ? "mx-auto grid w-full max-w-[486px] grid-cols-1"
+    : `grid grid-cols-1 gap-[32px] ${colsClass}`;
+  const itemSizes = isSingle
+    ? "(max-width: 768px) 100vw, 486px"
+    : "(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw";
 
   return (
     <section
@@ -85,7 +95,7 @@ export function ImmersivePhoneRow({ id, aspect = "440/872", media }: Props) {
       id={id}
       className="mx-auto w-full max-w-[1385px] scroll-mt-[72px] px-dzq-space-6 py-dzq-space-9"
     >
-      <div className={`grid grid-cols-1 gap-[32px] ${colsClass}`}>
+      <div className={gridClass}>
         {media.map((item, i) => (
           <div
             key={i}
@@ -95,7 +105,7 @@ export function ImmersivePhoneRow({ id, aspect = "440/872", media }: Props) {
           >
             <ImmersiveMedia
               media={item}
-              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
+              sizes={itemSizes}
             />
           </div>
         ))}

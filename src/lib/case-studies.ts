@@ -133,6 +133,8 @@ export type CaseStudyImmersiveIntro = {
   readonly subtitle: string;
   readonly role: readonly string[];
   readonly company: string;
+  /** Override the right-column label above `company` (defaults to "Company"). */
+  readonly companyLabel?: string;
   readonly readMore?: CaseStudyImmersiveLink;
 };
 
@@ -142,23 +144,49 @@ export type CaseStudyImmersiveStats = {
   readonly readMore?: CaseStudyImmersiveLink;
 };
 
+/**
+ * Lightweight alternative to `CaseStudyImmersiveStats` used by case studies
+ * whose results section is a list of takeaways rather than a stat grid
+ * (e.g. AightBet's "What I learned" block).
+ */
+export type CaseStudyImmersiveLearnings = {
+  readonly title: string;
+  readonly paragraphs: readonly string[];
+  readonly readMore?: CaseStudyImmersiveLink;
+};
+
 export type CaseStudyImmersiveHero = {
-  readonly backgroundSrc: string;
-  readonly backgroundAlt: string;
+  /**
+   * Visual treatment for the hero. `"image"` renders a full-bleed background
+   * photo with parallax (AthleteHQ); `"dark-with-phones"` renders a solid
+   * black hero with cross gridlines and ghosted phone screens at the right
+   * (AightBet). Defaults to `"image"`.
+   */
+  readonly variant?: "image" | "dark-with-phones";
+  /** Required when `variant === "image"`. */
+  readonly backgroundSrc?: string;
+  readonly backgroundAlt?: string;
   /** Optional logo glyph rendered next to the title in a horizontal lockup. */
   readonly logoSrc?: string;
   readonly logoAlt?: string;
   readonly logoWidth?: number;
   readonly logoHeight?: number;
+  /** Used by `variant === "dark-with-phones"` — phones tucked into the hero. */
+  readonly heroPhones?: readonly CaseStudyImmersiveMedia[];
+  /** CSS aspect ratio for each hero phone, defaults to `293/637`. */
+  readonly heroPhoneAspect?: string;
 };
 
 export type CaseStudyImmersiveNextProject = {
   /** Eyebrow text above the wordmark; defaults to "Next project". */
   readonly eyebrow?: string;
-  readonly logoSrc: string;
-  readonly logoAlt: string;
-  readonly logoWidth: number;
-  readonly logoHeight: number;
+  /** Image variant — full-width wordmark. */
+  readonly logoSrc?: string;
+  readonly logoAlt?: string;
+  readonly logoWidth?: number;
+  readonly logoHeight?: number;
+  /** Text variant — rendered when `logoSrc` is omitted. */
+  readonly headline?: string;
 };
 
 /**
@@ -175,7 +203,13 @@ export type CaseStudyImmersiveLayout = {
   readonly resultsAnchorId: string;
   readonly intro?: CaseStudyImmersiveIntro;
   readonly scenes: readonly CaseStudyImmersiveScene[];
-  readonly stats: CaseStudyImmersiveStats;
+  /**
+   * Numeric stat grid (AthleteHQ). Mutually exclusive with `learnings`.
+   * Renderers should render `learnings` if present, otherwise `stats`.
+   */
+  readonly stats?: CaseStudyImmersiveStats;
+  /** Takeaways block (AightBet). Mutually exclusive with `stats`. */
+  readonly learnings?: CaseStudyImmersiveLearnings;
   readonly nextProject?: CaseStudyImmersiveNextProject;
 };
 
@@ -201,6 +235,12 @@ const EMPTY_MEDIA: CaseStudyMedia = { src: "", type: "image", alt: "" };
 
 /** Long-form deck used by every Read More button on the AthleteHQ case. */
 const ATHLETEHQ_DECK_HREF = "https://www.figma.com/deck/Ochn7B9rnOy3v0MXV13too";
+
+/**
+ * Long-form deck for AightBet. Currently points to the same hub as the
+ * homepage card; swap to a dedicated deck when one ships.
+ */
+const AIGHTBET_DECK_HREF = "https://www.figma.com/deck/Ochn7B9rnOy3v0MXV13too";
 
 export const CASE_STUDIES: Record<CaseSlug, CaseStudy> = {
   athletehq: {
@@ -451,7 +491,8 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
   aightbet: {
     slug: "aightbet",
     title: TITLES.aightbet,
-    tagline: "",
+    tagline:
+      "Turning group-chat trash talk into real bets you can settle.",
     heroParagraph: "",
     role: [],
     company: "",
@@ -463,6 +504,160 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
       year: "2025 · Vibe Coded",
       description:
         "A social betting app that turns casual trash talk into structured bets with real outcomes.",
+    },
+    immersive: {
+      nav: [
+        { id: "intro", label: "Overview" },
+        { id: "phone-trio", label: "Design" },
+        { id: "results", label: "Results" },
+      ],
+      hero: {
+        variant: "dark-with-phones",
+        logoSrc: "/assets/davidzqin.com/aightbet-cap.svg",
+        logoAlt: "AightBet logo",
+        logoWidth: 172,
+        logoHeight: 106,
+        heroPhoneAspect: "293/637",
+        heroPhones: [
+          {
+            src: "/assets/davidzqin.com/aightbet-interstitial.png",
+            type: "image",
+            alt: "AightBet interstitial — bet created confirmation",
+          },
+          {
+            src: "/assets/davidzqin.com/aightbet-home.png",
+            type: "image",
+            alt: "AightBet home — active bets feed",
+          },
+          {
+            src: "/assets/davidzqin.com/aightbet-bet-details.png",
+            type: "image",
+            alt: "AightBet bet details — proof and outcome",
+          },
+        ],
+      },
+      introAnchorId: "intro",
+      designAnchorId: "phone-trio",
+      resultsAnchorId: "results",
+      intro: {
+        title:
+          "Turning group-chat trash talk into real bets you can settle.",
+        subtitle: `Bets between friends happen constantly: "$20 says you won't do it". They die the same day. No one tracks them, no one settles them, and the only record is a group chat someone will scroll past tomorrow. AightBet turns that into a light structured layer: create the bet, track the outcome, settle up.
+
+I designed and built the MVP solo using Figma + Cursor — a social betting app that sits between BeReal, Venmo, and Kalshi.`,
+        role: [
+          "Vibe-coding",
+          "Product Design",
+          "Product Strategy",
+          "Prototyping",
+          "Creative Direction",
+        ],
+        company: "Personal Project",
+        companyLabel: "Vibe-coded",
+        readMore: { label: "Full Case Study", href: AIGHTBET_DECK_HREF },
+      },
+      scenes: [
+        {
+          kind: "phone-row",
+          id: "phone-trio",
+          aspect: "402/874",
+          media: [
+            {
+              src: "/assets/davidzqin.com/aightbet-home.png",
+              type: "image",
+              alt: "AightBet home — active bets feed",
+            },
+            {
+              src: "/assets/davidzqin.com/aightbet-confirmation.png",
+              type: "image",
+              alt: "AightBet bet confirmation",
+            },
+            {
+              src: "/assets/davidzqin.com/aightbet-interstitial.png",
+              type: "image",
+              alt: "AightBet interstitial — bet created",
+            },
+          ],
+        },
+        {
+          kind: "statement",
+          id: "statement-1",
+          leftText: "Social, financial, predictive — in one tap.",
+          rightText: `Friend bets already sit at the intersection of three behaviours people do every day: social posting, sending money, and making predictions. No single app handles that combination. AightBet's job is to make the bet itself feel as casual as a group-chat reply, while quietly handling the structure underneath.`,
+        },
+        {
+          kind: "phone-row",
+          id: "scene-create-flow",
+          aspect: "399/873",
+          media: [
+            {
+              src: "/assets/davidzqin.com/aightbet-bet-details.png",
+              type: "image",
+              alt: "AightBet bet details — what's the bet?",
+            },
+            {
+              src: "/assets/davidzqin.com/aightbet-stake.png",
+              type: "image",
+              alt: "AightBet stake — set the wager",
+            },
+            {
+              src: "/assets/davidzqin.com/aightbet-participants.png",
+              type: "image",
+              alt: "AightBet participants — invite friends",
+            },
+          ],
+        },
+        {
+          kind: "statement",
+          id: "statement-2",
+          leftText: "Create a bet in fewer taps than writing one.",
+          rightText: `The create-bet flow was the hardest part to get right. It had to capture stakes, participants, and a clear resolution condition without feeling like filing a form. I iterated in Figma, pushed the design into Cursor via Figma MCP, and kept tightening the flow until creating a bet felt faster than typing it out in iMessage.`,
+        },
+        {
+          kind: "phone-row",
+          id: "scene-create-v1",
+          aspect: "486/1011",
+          media: [
+            {
+              src: "/assets/davidzqin.com/aightbet-create-bet-v1.mov",
+              type: "video",
+              alt: "AightBet create-bet flow — early prototype",
+            },
+          ],
+        },
+        {
+          kind: "statement",
+          id: "statement-3",
+          leftText: "One builder, full stack, live prototype.",
+          rightText: `I ran product, engineering, and design at once. Figma stayed the source of truth for system decisions; Cursor handled implementation; small features like the image uploader were vibe-coded directly. The real bottleneck wasn't ideation — AI accelerates that — it was the translation layer between tools.`,
+        },
+        {
+          kind: "phone-row",
+          id: "scene-create-live",
+          aspect: "486/1056",
+          media: [
+            {
+              src: "/assets/davidzqin.com/aightbet-create-bet-live.mov",
+              type: "video",
+              alt: "AightBet create-bet flow — live build",
+            },
+          ],
+        },
+      ],
+      learnings: {
+        title: "What I learned",
+        paragraphs: [
+          "AI speeds exploration, not decisions — the hard calls still need human judgment.",
+          "Figma stays the anchor — as soon as Cursor became source of truth, decisions got noisy.",
+          "Tool translation is the bottleneck — the gap between Figma and code ate more time than either tool alone.",
+          "Solo full-stack is a superpower and a trap — you move fast; you also lose the friction that makes you think twice.",
+        ],
+        readMore: { label: "Full Case Study", href: AIGHTBET_DECK_HREF },
+      },
+      nextProject: {
+        eyebrow: "Next Project",
+        headline: "Shopify Fulfilment Config Manager Redesign",
+      },
     },
   },
   shopify: {

@@ -64,7 +64,7 @@ export function ImmersiveIntro({ id, intro }: Props) {
           {intro.company && (
             <div className="flex flex-col gap-dzq-space-5">
               <p className="m-0 text-[18px] font-dzq-medium leading-none text-[#64748B]">
-                Company
+                {intro.companyLabel ?? "Company"}
               </p>
               <p className="m-0 text-[clamp(18px,2vw,24px)] leading-snug text-dzq-fg-1">
                 {intro.company}

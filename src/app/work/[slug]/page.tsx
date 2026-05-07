@@ -14,10 +14,8 @@ import { CaseNextProject } from "./_components/CaseNextProject";
 import { CaseSection } from "./_components/CaseSection";
 import { CaseStickyNav } from "./_components/CaseStickyNav";
 
-const AthleteHQImmersive = dynamic(() =>
-  import("./_components/immersive/AthleteHQImmersive").then(
-    (m) => m.AthleteHQImmersive,
-  ),
+const CaseImmersive = dynamic(() =>
+  import("./_components/immersive/CaseImmersive").then((m) => m.CaseImmersive),
 );
 
 type Props = { params: Promise<{ slug: string }> };
@@ -69,7 +67,7 @@ export default async function WorkCasePage({ params }: Props) {
             <div className="immersive-case__header">
               <Header variant="case" />
             </div>
-            <AthleteHQImmersive
+            <CaseImmersive
               layout={study.immersive}
               title={study.title}
               slug={study.slug}
