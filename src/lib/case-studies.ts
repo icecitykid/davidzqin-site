@@ -236,11 +236,8 @@ const EMPTY_MEDIA: CaseStudyMedia = { src: "", type: "image", alt: "" };
 /** Long-form deck used by every Read More button on the AthleteHQ case. */
 const ATHLETEHQ_DECK_HREF = "https://www.figma.com/deck/Ochn7B9rnOy3v0MXV13too";
 
-/**
- * Long-form deck for AightBet. Currently points to the same hub as the
- * homepage card; swap to a dedicated deck when one ships.
- */
-const AIGHTBET_DECK_HREF = "https://www.figma.com/deck/Ochn7B9rnOy3v0MXV13too";
+/** Long-form deck used by every Read More button on the AightBet case. */
+const AIGHTBET_DECK_HREF = "https://www.figma.com/deck/Q1wjzMaofpDlNdFjDOK1ch";
 
 export const CASE_STUDIES: Record<CaseSlug, CaseStudy> = {
   athletehq: {
