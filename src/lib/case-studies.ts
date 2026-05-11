@@ -375,14 +375,14 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
               alt: "Sport rep portal landing screen recording",
             },
             {
-              src: "/assets/davidzqin.com/sport-rep-mobile-1-1.png",
+              src: "/assets/davidzqin.com/sport-rep-mobile-1-2.png",
               type: "image",
-              alt: "Sport rep mobile — athlete dashboard",
+              alt: "Sport rep mobile — Today brief, Celebrating, Your Crew",
             },
             {
               src: "/assets/davidzqin.com/sport-rep-mobile-2-1.png",
               type: "image",
-              alt: "Sport rep mobile — quick poll",
+              alt: "Sport rep mobile — Polls feed",
             },
           ],
         },
