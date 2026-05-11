@@ -74,6 +74,13 @@ export type CaseStudyImmersiveScene =
       readonly id?: string;
       /** CSS aspect ratio for each phone frame, e.g. `"440/872"` or `"375/812"`. */
       readonly aspect?: string;
+      /**
+       * Override the per-phone corner radius in px. Defaults to `60` to
+       * preserve the original homepage-card / phone-trio look. Set to `40`
+       * to match the 4-screen scroll (Figma `4138:1912`) — Figma uses 40px
+       * for every chrome-less screen in the AthleteHQ case.
+       */
+      readonly radius?: number;
       readonly media: readonly CaseStudyImmersiveMedia[];
     }
   | {
@@ -332,10 +339,20 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
         {
           kind: "phone-row",
           id: "scene-onboarding",
-          aspect: "440/872",
+          // Matches Figma `4138:1912` (4-screen scroll): each phone is
+          // 393×852 with a 40px corner radius. The earlier `440/872`
+          // value was inherited from the phone-trio above (4210:1278) and
+          // made the screens read too wide / too rounded vs. design.
+          aspect: "393/852",
+          radius: 40,
           media: [
             {
-              src: "/assets/onboarding-screen-recording.mov",
+              // Re-encoded MP4 derived from the original .mov: cropped to
+              // strip the device chrome (bezels/notch/buttons) baked into
+              // the source recording, then padded with slate-100 to land at
+              // the row's 393/852 wrapper aspect so it visually rhymes
+              // with the still phones beside it.
+              src: "/assets/davidzqin.com/onboarding-screen-recording.mp4",
               type: "video",
               alt: "Athlete onboarding screen recording",
             },
@@ -370,7 +387,10 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
           aspect: "440/872",
           media: [
             {
-              src: "/assets/sport-rep-landing-screen-recording.mov",
+              // Re-encoded with the same crop+pad treatment as the
+              // onboarding video so it sits flush with the surrounding
+              // still phones.
+              src: "/assets/davidzqin.com/sport-rep-landing-screen-recording.mp4",
               type: "video",
               alt: "Sport rep portal landing screen recording",
             },

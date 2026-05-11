@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type CSSProperties } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import type { CaseStudyImmersiveMedia } from "@/lib/case-studies";
 import { ImmersiveMedia } from "./ImmersiveMedia";
@@ -9,6 +9,13 @@ type Props = {
   id?: string;
   /** CSS aspect ratio for each phone frame (e.g. `"440/872"`). Defaults to `"440/872"`. */
   aspect?: string;
+  /**
+   * Per-phone corner radius in px. Defaults to `60` to preserve the
+   * original homepage-card / phone-trio look. The AthleteHQ 4-screen scroll
+   * (Figma `4138:1912`) overrides this to `40` to match the design system —
+   * every chrome-less screen in the AthleteHQ Figma uses `border-radius: 40`.
+   */
+  radius?: number;
   media: readonly CaseStudyImmersiveMedia[];
 };
 
@@ -19,7 +26,12 @@ type Props = {
  * GSAP scroll-triggered fade/slide-in matches the original phone-trio
  * timeline; `prefers-reduced-motion` skips the animation entirely.
  */
-export function ImmersivePhoneRow({ id, aspect = "440/872", media }: Props) {
+export function ImmersivePhoneRow({
+  id,
+  aspect = "440/872",
+  radius = 60,
+  media,
+}: Props) {
   const sectionRef = useRef<HTMLElement>(null);
   const itemsRef = useRef<HTMLDivElement[]>([]);
   itemsRef.current = [];
@@ -100,8 +112,13 @@ export function ImmersivePhoneRow({ id, aspect = "440/872", media }: Props) {
           <div
             key={i}
             ref={setItem}
-            className="relative overflow-hidden rounded-[60px] will-change-transform after:pointer-events-none after:absolute after:inset-0 after:rounded-[60px] after:ring-1 after:ring-inset after:ring-slate-100"
-            style={{ aspectRatio: aspect }}
+            className="relative overflow-hidden rounded-[var(--phone-radius)] will-change-transform after:pointer-events-none after:absolute after:inset-0 after:rounded-[var(--phone-radius)] after:ring-1 after:ring-inset after:ring-slate-100"
+            style={
+              {
+                aspectRatio: aspect,
+                "--phone-radius": `${radius}px`,
+              } as CSSProperties
+            }
           >
             <ImmersiveMedia
               media={item}

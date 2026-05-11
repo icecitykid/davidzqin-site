@@ -31,6 +31,7 @@ function SceneRenderer({ scene }: { scene: CaseStudyImmersiveScene }) {
         <ImmersivePhoneRow
           id={scene.id}
           aspect={scene.aspect}
+          radius={scene.radius}
           media={scene.media}
         />
       );
