@@ -361,6 +361,7 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
           // fill edge-to-edge; the video bumps its own radius to 70.
           aspect: "393/852",
           radius: 40,
+          border: true,
           media: [
             {
               // Phone 1 (Figma 4138:2769) — "onboarding screen
