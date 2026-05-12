@@ -724,7 +724,6 @@ I designed and built the MVP solo using Figma + Cursor — a social betting app 
           "AI speeds exploration, not decisions — the hard calls still need human judgment.",
           "Figma stays the anchor — as soon as Cursor became source of truth, decisions got noisy.",
           "Tool translation is the bottleneck — the gap between Figma and code ate more time than either tool alone.",
-          "Solo full-stack is a superpower and a trap — you move fast; you also lose the friction that makes you think twice.",
         ],
         readMore: { label: "Full Case Study", href: AIGHTBET_DECK_HREF },
       },
