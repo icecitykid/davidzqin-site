@@ -271,15 +271,11 @@ a {
   padding: 14px 0 18px;
 }
 
-.hdr--home,
+/* About: always transparent, sticky. */
 .hdr--about {
   position: sticky;
   top: 0;
   z-index: 40;
-}
-
-/* About: always transparent. */
-.hdr--about {
   background: transparent;
 }
 
@@ -303,7 +299,7 @@ a {
      the same vertical position as About and the case-study header. */
   padding-top: 28px;
   background: transparent;
-  transition: background 220ms ease, backdrop-filter 220ms ease, padding 220ms ease;
+  transition: background 220ms ease, backdrop-filter 220ms ease, -webkit-backdrop-filter 220ms ease, padding 220ms ease;
 }
 
 /* Once frosted, collapse the 28px breathing room so the glass strip sits
