@@ -426,6 +426,7 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
           // flush with the top of the cell, instead of leaving slate-100
           // gutters on each side.
           aspect: "393/852",
+          border: true,
           media: [
             {
               // Re-encoded with slate-100 padding on the top/bottom (in
@@ -489,6 +490,7 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
           kind: "phone-row",
           id: "scene-nikeapp",
           aspect: "375/812",
+          border: true,
           media: [
             {
               src: "/assets/davidzqin.com/nike-app-onboarding.png",
