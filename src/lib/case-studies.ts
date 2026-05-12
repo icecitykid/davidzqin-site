@@ -64,6 +64,13 @@ export type CaseStudyImmersiveMedia = {
    * instead of cropping.
    */
   readonly objectFit?: "cover" | "contain";
+  /**
+   * Per-item override for the cell corner radius (px). Defaults to the row's
+   * `radius` (or 60). Use this when a single item in a phone row needs a
+   * different corner radius than its siblings — e.g. the sport-rep video
+   * sits at 70 while the still phones beside it stay at 60.
+   */
+  readonly radius?: number;
 };
 
 /** Discriminated union of all scene shapes the immersive layout supports. */
@@ -347,41 +354,58 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
         {
           kind: "phone-row",
           id: "scene-onboarding",
-          // Matches Figma `4138:1912` (4-screen scroll): each phone is
-          // 393×852 with a 40px corner radius. The earlier `440/872`
-          // value was inherited from the phone-trio above (4210:1278) and
-          // made the screens read too wide / too rounded vs. design.
+          // Figma `4138:1912` (4-screen scroll): every still phone is a
+          // chrome-less 393×852 screen with rounded-[40], and the leftmost
+          // phone is a 418×856 device-frame mockup at rounded-[70] showing
+          // the screen recording. Cells use 393/852 so the still phones
+          // fill edge-to-edge; the video bumps its own radius to 70.
           aspect: "393/852",
           radius: 40,
           media: [
             {
-              // Re-encoded MP4 derived from the original .mov: cropped to
-              // strip the device chrome (bezels/notch/buttons) baked into
-              // the source recording, then padded with slate-100 to land at
-              // the row's 393/852 wrapper aspect so it visually rhymes
-              // with the still phones beside it.
+              // Phone 1 (Figma 4138:2769) — "onboarding screen
+              // recording.mov". Cropped from the original .mov to strip
+              // the iPhone bezels baked into the recording, then padded
+              // with slate-100 on the sides so the screen content lands
+              // at the row's 393/852 wrapper aspect. Cell radius bumped
+              // to 70 (vs. 40 on the stills) to match the device-frame
+              // mockup in Figma.
               src: "/assets/davidzqin.com/athlete-app-home-view.mp4",
               type: "video",
               alt: "Athlete app home view — daily prompt and product picks",
-              objectFit: "contain",
+              objectFit: "cover",
+              radius: 70,
             },
             {
-              src: "/assets/davidzqin.com/0-b-value-prop.png",
+              // Phone 2 (Figma 4138:3017) — Interests selection screen.
+              // Exported directly from Figma at native 393×852 to replace
+              // the earlier `7-relevant-community-screen.png` export,
+              // which was cropped at half-width with content cut off.
+              src: "/assets/davidzqin.com/interests-screen.png",
+              type: "image",
+              alt: "Onboarding — select interests that you identify with most",
+              objectFit: "cover",
+            },
+            {
+              // Phone 3 (Figma 4138:2770) — Connect to Nike Services
+              // splash. Exported at native 393×852 from Figma; replaces
+              // the earlier `0-b-value-prop.png` (1066×1984) which was
+              // padded with horizontal slate-bg outside the rounded
+              // phone screen.
+              src: "/assets/davidzqin.com/connect-to-nike-services.png",
               type: "image",
               alt: "Onboarding — connect to Nike services",
-              objectFit: "contain",
+              objectFit: "cover",
             },
             {
+              // Phone 4 (Figma 4138:2806) — Sport selection screen. The
+              // existing 4-sport.png export (830×1704) matches the
+              // Figma frame aspect (415/852 ≈ 0.487) and renders cleanly
+              // with cover.
               src: "/assets/davidzqin.com/4-sport.png",
               type: "image",
               alt: "Onboarding — choose your sport",
-              objectFit: "contain",
-            },
-            {
-              src: "/assets/davidzqin.com/7-relevant-community-screen.png",
-              type: "image",
-              alt: "Onboarding — relevant community screen",
-              objectFit: "contain",
+              objectFit: "cover",
             },
           ],
         },
@@ -395,15 +419,25 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
         {
           kind: "phone-row",
           id: "scene-sport-rep",
-          aspect: "440/872",
+          // The still phones beside the video are 810×1754 (≈ iPhone screen
+          // 393/852 = 9:19.5). Matching the row to that aspect lets the
+          // stills fill their cells edge-to-edge so the iOS status bar sits
+          // flush with the top of the cell, instead of leaving slate-100
+          // gutters on each side.
+          aspect: "393/852",
           media: [
             {
-              // Re-encoded with the same crop+pad treatment as the
-              // onboarding video so it sits flush with the surrounding
-              // still phones.
+              // Re-encoded with slate-100 padding on the top/bottom (in
+              // addition to the side gutters) so the video lands at the new
+              // 393/852 row aspect alongside the still phones.
               src: "/assets/davidzqin.com/sport-rep-landing-screen-recording.mp4",
               type: "video",
               alt: "Sport rep portal landing screen recording",
+              // The screen recording reads a touch boxier than the still
+              // phones because its corners are clipped by the cell only
+              // (no rounded source frame). Bumping just this cell to 70
+              // brings the visible curvature in line with the stills.
+              radius: 70,
             },
             {
               src: "/assets/davidzqin.com/sport-rep-mobile-1-2.png",

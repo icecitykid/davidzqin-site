@@ -276,25 +276,71 @@ a {
   position: sticky;
   top: 0;
   z-index: 40;
-  /* Slate-100 tint reads as its own surface over the white page even when
-     nothing colorful is behind it; blur kicks in once case-card art scrolls
-     under the bar. */
+}
+
+/* About: always transparent. */
+.hdr--about {
+  background: transparent;
+}
+
+/*
+ * Home header: two-layer glass pattern (mirrors .immersive-case__header).
+ *
+ * .hdr--home-shell  — outer sticky shell, always full body width (since the
+ *                     component is rendered OUTSIDE .page). The glass bg is
+ *                     applied here so it truly bleeds edge-to-edge even when
+ *                     the page's max-width leaves side gaps on wide screens.
+ *
+ * .hdr--home        — inner content bar, max-width + auto margins to keep
+ *                     the logo/nav aligned with the page content below.
+ */
+.hdr--home-shell {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  /* Restore the 28px page top-padding that previously sat above the header
+     when the header lived inside .page. This keeps the header content at
+     the same vertical position as About and the case-study header. */
+  padding-top: 28px;
+  background: transparent;
+  transition: background 220ms ease, backdrop-filter 220ms ease, padding 220ms ease;
+}
+
+/* Once frosted, collapse the 28px breathing room so the glass strip sits
+   flush — same behaviour as the case study header. */
+.hdr--home-shell--scrolled {
+  padding-top: 0;
   background: rgba(241, 245, 249, 0.7);
   backdrop-filter: blur(14px) saturate(160%);
   -webkit-backdrop-filter: blur(14px) saturate(160%);
 }
 
+/* Home page: header is now outside .page, so .page no longer needs its own
+   top padding (the shell provides it). */
+.page--home {
+  padding-top: 0;
+}
+
+.hdr--home {
+  box-sizing: border-box;
+  max-width: 1536px;
+  margin: 0 auto;
+  padding-inline: 40px;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .hdr--home,
-  .hdr--about {
+  .hdr--home-shell {
+    transition: none;
+  }
+  .hdr--home-shell--scrolled {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     background: rgba(241, 245, 249, 0.96);
+    padding-top: 0;
   }
 }
 
 /* Header sits inside `.page` padding; bleed bg to viewport edges of the page shell */
-.page > .hdr--home,
 .about-root .page > .hdr--about {
   margin-inline: -40px;
   padding-inline: 40px;
@@ -1211,7 +1257,14 @@ a {
     padding-bottom: 0;
   }
 
-  .page > .hdr--home,
+  .hdr--home {
+    padding-inline: 20px;
+  }
+
+  .hdr--home-shell {
+    padding-top: 20px;
+  }
+
   .about-root .page > .hdr--about {
     margin-inline: -20px;
     padding-inline: 20px;

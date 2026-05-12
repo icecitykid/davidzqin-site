@@ -124,7 +124,7 @@ export function ImmersivePhoneRow({
             style={
               {
                 aspectRatio: aspect,
-                "--phone-radius": `${radius}px`,
+                "--phone-radius": `${item.radius ?? radius}px`,
               } as CSSProperties
             }
           >

@@ -1,7 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { HeaderCase } from "@/components/HeaderCase";
-import { LOGO_SRC } from "@/lib/constants";
+import { HeaderHome } from "@/components/HeaderHome";
 
 export type HeaderVariant = "home" | "about" | "case";
 
@@ -38,15 +37,5 @@ export function Header({ variant }: { variant: HeaderVariant }) {
     return <HeaderCase />;
   }
 
-  return (
-    <header className="hdr hdr--home">
-      <Link href="/" className="brand" aria-label="David Z. Qin — home">
-        <Image src={LOGO_SRC} alt="" width={30} height={40} unoptimized />
-        <div className="name">David Z. Qin</div>
-      </Link>
-      <nav className="nav" aria-label="Primary">
-        <Link href="/about">About</Link>
-      </nav>
-    </header>
-  );
+  return <HeaderHome />;
 }
