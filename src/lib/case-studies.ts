@@ -456,11 +456,11 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
         {
           kind: "full-width-screenshot",
           id: "scene-webapp",
-          aspect: "1412/1004",
+          aspect: "1504/962",
           media: {
-            src: "/assets/davidzqin.com/webapp-profile-2.png",
-            type: "image",
-            alt: "Sport rep web app — athlete profile view",
+            src: "/assets/davidzqin.com/consumer-app-splash.mp4",
+            type: "video",
+            alt: "AthleteHQ consumer app — splash and onboarding",
           },
         },
         {
