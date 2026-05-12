@@ -300,9 +300,9 @@ a {
     padding-top: 28px;
   }
   to {
-    background: rgba(241, 245, 249, 0.7);
-    backdrop-filter: blur(14px) saturate(160%);
-    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    background: rgba(241, 245, 249, 0.82);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     padding-top: 0;
   }
 }
@@ -327,9 +327,9 @@ a {
 /* Fallback for older browsers: always show the glass */
 @supports not (animation-timeline: scroll()) {
   .hdr--home-shell {
-    background: rgba(241, 245, 249, 0.7);
-    backdrop-filter: blur(14px) saturate(160%);
-    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    background: rgba(241, 245, 249, 0.82);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     padding-top: 0;
   }
 }
