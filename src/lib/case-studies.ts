@@ -75,6 +75,13 @@ export type CaseStudyImmersiveScene =
       /** CSS aspect ratio for each phone frame, e.g. `"440/872"` or `"375/812"`. */
       readonly aspect?: string;
       /**
+       * Draw a 1px slate-300 hairline around each phone in the row. Opt-in
+       * because most phone rows already read as well-defined cards against
+       * the slate-100 page; specific rows (e.g. the AthleteHQ 4-screen
+       * onboarding scroll) benefit from a visible edge.
+       */
+      readonly border?: boolean;
+      /**
        * Override the per-phone corner radius in px. Defaults to `60` to
        * preserve the original homepage-card / phone-trio look. Set to `40`
        * to match the 4-screen scroll (Figma `4138:1912`) — Figma uses 40px
@@ -307,6 +314,7 @@ I led end-to-end designs on a new system — an athlete-facing mobile app, an in
           kind: "phone-row",
           id: "phone-trio",
           aspect: "440/872",
+          border: true,
           // Order matches Figma 4138:1872 (Landing → Interstitial-3 →
           // Interstitial-1-1). Updated 2026-05 alongside re-exports of all
           // three screens.
@@ -352,19 +360,22 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
               // the source recording, then padded with slate-100 to land at
               // the row's 393/852 wrapper aspect so it visually rhymes
               // with the still phones beside it.
-              src: "/assets/davidzqin.com/onboarding-screen-recording.mp4",
+              src: "/assets/davidzqin.com/athlete-app-home-view.mp4",
               type: "video",
-              alt: "Athlete onboarding screen recording",
+              alt: "Athlete app home view — daily prompt and product picks",
+              objectFit: "contain",
             },
             {
               src: "/assets/davidzqin.com/0-b-value-prop.png",
               type: "image",
               alt: "Onboarding — connect to Nike services",
+              objectFit: "contain",
             },
             {
               src: "/assets/davidzqin.com/4-sport.png",
               type: "image",
               alt: "Onboarding — choose your sport",
+              objectFit: "contain",
             },
             {
               src: "/assets/davidzqin.com/7-relevant-community-screen.png",

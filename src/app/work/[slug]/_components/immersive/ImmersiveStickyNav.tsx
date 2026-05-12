@@ -58,7 +58,7 @@ export function ImmersiveStickyNav({ sections }: Props) {
       "relative block py-dzq-space-2 text-dzq-base font-dzq-medium transition-colors duration-300 ease-out after:absolute after:bottom-0 after:left-0 after:h-px after:bg-current after:transition-[right] after:duration-300 after:ease-out";
     const color = isActive
       ? "text-dzq-fg-1"
-      : "text-slate-400 hover:text-dzq-fg-1";
+      : "text-slate-500 hover:text-dzq-fg-1";
     const bar = isActive ? "after:right-0" : "after:right-full";
     return `${base} ${color} ${bar}`;
   };

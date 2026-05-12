@@ -32,7 +32,9 @@ export function ImmersiveMedia({ media, sizes, priority }: Props) {
     }
   }, [media.type]);
 
-  const fitClass = media.objectFit === "contain" ? "object-contain" : "object-cover";
+  const fitClass =
+    media.objectFit === "contain" ? "object-contain" : "object-cover";
+  const positionClass = "absolute inset-0 z-0 h-full w-full object-center";
 
   if (media.type === "video") {
     return (
@@ -46,7 +48,7 @@ export function ImmersiveMedia({ media, sizes, priority }: Props) {
         playsInline
         preload="metadata"
         aria-label={media.alt}
-        className={`absolute inset-0 h-full w-full ${fitClass}`}
+        className={`${positionClass} ${fitClass}`}
       />
     );
   }
@@ -58,7 +60,7 @@ export function ImmersiveMedia({ media, sizes, priority }: Props) {
       fill
       sizes={sizes}
       priority={priority}
-      className={fitClass}
+      className={`${positionClass} ${fitClass}`}
     />
   );
 }

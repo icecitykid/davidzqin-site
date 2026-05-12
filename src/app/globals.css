@@ -276,7 +276,21 @@ a {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: var(--dzq-bg);
+  /* Slate-100 tint reads as its own surface over the white page even when
+     nothing colorful is behind it; blur kicks in once case-card art scrolls
+     under the bar. */
+  background: rgba(241, 245, 249, 0.7);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hdr--home,
+  .hdr--about {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(241, 245, 249, 0.96);
+  }
 }
 
 /* Header sits inside `.page` padding; bleed bg to viewport edges of the page shell */
@@ -325,18 +339,18 @@ a {
   padding: 14px 40px 18px;
 }
 
-/* Frosted strip once case header switches to light-section mode (see HeaderCase). */
+/* Frosted strip once case header switches to light-section mode (see HeaderCase).
+   Vertical insets are split so the inner bar sits centered in the frosted strip:
+   top = outer 12 + inner 8 = 20; bottom = outer 11 + inner 9 = 20. */
 .immersive-case__header:has(.hdr--case--on-light) {
-  padding-top: 12px;
-  background: rgba(248, 250, 252, 0.72);
+  padding: 12px 0 11px;
+  background: rgba(248, 250, 252, 0.36);
   backdrop-filter: blur(14px) saturate(160%);
   -webkit-backdrop-filter: blur(14px) saturate(160%);
-  border-bottom: 1px solid rgba(203, 213, 225, 0.55);
   transition:
     background 220ms ease,
-    border-color 220ms ease,
     backdrop-filter 220ms ease,
-    padding-top 220ms ease;
+    padding 220ms ease;
 }
 
 .immersive-case__header:has(.hdr--case--on-light) .hdr--case {
@@ -349,7 +363,7 @@ a {
   }
 
   .immersive-case__header:has(.hdr--case--on-light) {
-    padding-top: 10px;
+    padding: 10px 0 9px;
   }
 
   .immersive-case__header .hdr--case {

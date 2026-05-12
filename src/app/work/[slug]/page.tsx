@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
@@ -9,14 +8,11 @@ import { getCaseStudy } from "@/lib/case-studies";
 import { CASE_SLUGS, isCaseSlug } from "@/lib/work";
 import { CaseCredits } from "./_components/CaseCredits";
 import { CaseHero } from "./_components/CaseHero";
+import { CaseImmersive } from "./_components/immersive/CaseImmersive";
 import { CaseLearnings } from "./_components/CaseLearnings";
 import { CaseNextProject } from "./_components/CaseNextProject";
 import { CaseSection } from "./_components/CaseSection";
 import { CaseStickyNav } from "./_components/CaseStickyNav";
-
-const CaseImmersive = dynamic(() =>
-  import("./_components/immersive/CaseImmersive").then((m) => m.CaseImmersive),
-);
 
 type Props = { params: Promise<{ slug: string }> };
 

@@ -32,6 +32,7 @@ function SceneRenderer({ scene }: { scene: CaseStudyImmersiveScene }) {
           id={scene.id}
           aspect={scene.aspect}
           radius={scene.radius}
+          border={scene.border}
           media={scene.media}
         />
       );

@@ -16,6 +16,11 @@ type Props = {
    * every chrome-less screen in the AthleteHQ Figma uses `border-radius: 40`.
    */
   radius?: number;
+  /**
+   * When true, swap the otherwise-invisible inset slate-100 ring for a
+   * visible slate-300 hairline so each phone reads as a bordered card.
+   */
+  border?: boolean;
   media: readonly CaseStudyImmersiveMedia[];
 };
 
@@ -30,6 +35,7 @@ export function ImmersivePhoneRow({
   id,
   aspect = "440/872",
   radius = 60,
+  border = false,
   media,
 }: Props) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -96,7 +102,7 @@ export function ImmersivePhoneRow({
         : "md:grid-cols-3";
   const gridClass = isSingle
     ? "mx-auto grid w-full max-w-[486px] grid-cols-1"
-    : `grid grid-cols-1 gap-[32px] ${colsClass}`;
+    : `grid w-full grid-cols-1 items-start gap-[32px] ${colsClass}`;
   const itemSizes = isSingle
     ? "(max-width: 768px) 100vw, 486px"
     : "(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw";
@@ -112,7 +118,9 @@ export function ImmersivePhoneRow({
           <div
             key={i}
             ref={setItem}
-            className="relative overflow-hidden rounded-[var(--phone-radius)] will-change-transform after:pointer-events-none after:absolute after:inset-0 after:rounded-[var(--phone-radius)] after:ring-1 after:ring-inset after:ring-slate-100"
+            className={`relative min-w-0 w-full overflow-hidden rounded-[var(--phone-radius)] bg-slate-100 will-change-transform after:pointer-events-none after:absolute after:inset-0 after:rounded-[var(--phone-radius)] after:ring-1 after:ring-inset ${
+              border ? "after:ring-slate-300" : "after:ring-slate-100"
+            }`}
             style={
               {
                 aspectRatio: aspect,
