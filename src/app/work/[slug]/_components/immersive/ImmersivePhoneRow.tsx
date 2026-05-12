@@ -99,13 +99,17 @@ export function ImmersivePhoneRow({
       ? "md:grid-cols-2 lg:grid-cols-4"
       : media.length === 2
         ? "md:grid-cols-2"
-        : "md:grid-cols-3";
+        : media.length === 4
+          ? "md:grid-cols-4"
+          : "md:grid-cols-3";
   const gridClass = isSingle
     ? "mx-auto grid w-full max-w-[486px] grid-cols-1"
     : `grid w-full grid-cols-1 items-start gap-[32px] ${colsClass}`;
   const itemSizes = isSingle
     ? "(max-width: 768px) 100vw, 486px"
-    : "(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw";
+    : media.length === 4
+      ? "(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 20vw"
+      : "(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw";
 
   return (
     <section

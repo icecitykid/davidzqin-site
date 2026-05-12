@@ -450,6 +450,12 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
               type: "image",
               alt: "Sport rep mobile — Polls feed",
             },
+            {
+              src: "/assets/davidzqin.com/sport-marketing-poll-creation.png",
+              type: "image",
+              alt: "Sport rep mobile — Poll creation, publish step",
+              radius: 36,
+            },
           ],
         },
         {
