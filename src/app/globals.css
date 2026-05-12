@@ -325,13 +325,48 @@ a {
   padding: 14px 40px 18px;
 }
 
+/* Frosted strip once case header switches to light-section mode (see HeaderCase). */
+.immersive-case__header:has(.hdr--case--on-light) {
+  padding-top: 12px;
+  background: rgba(248, 250, 252, 0.72);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border-bottom: 1px solid rgba(203, 213, 225, 0.55);
+  transition:
+    background 220ms ease,
+    border-color 220ms ease,
+    backdrop-filter 220ms ease,
+    padding-top 220ms ease;
+}
+
+.immersive-case__header:has(.hdr--case--on-light) .hdr--case {
+  padding: 8px 40px 9px;
+}
+
 @media (max-width: 900px) {
   .immersive-case__header {
     padding-top: 20px;
   }
 
+  .immersive-case__header:has(.hdr--case--on-light) {
+    padding-top: 10px;
+  }
+
   .immersive-case__header .hdr--case {
     padding: 14px 20px 18px;
+  }
+
+  .immersive-case__header:has(.hdr--case--on-light) .hdr--case {
+    padding: 8px 20px 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .immersive-case__header:has(.hdr--case--on-light) {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.96);
+    transition: none;
   }
 }
 
@@ -348,6 +383,9 @@ a {
 
 .hdr--case--on-light {
   color: var(--dzq-fg-1);
+  /* Glass paint lives on `.immersive-case__header:has(...)` so blur covers
+     the full fixed strip; keep the inner bar transparent. */
+  background: transparent;
 }
 
 .hdr--case__back {
