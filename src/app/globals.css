@@ -406,12 +406,13 @@ a {
    top = outer 12 + inner 8 = 20; bottom = outer 11 + inner 9 = 20. */
 .immersive-case__header:has(.hdr--case--on-light) {
   padding: 12px 0 11px;
-  background: rgba(248, 250, 252, 0.36);
-  backdrop-filter: blur(14px) saturate(160%);
-  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  background: rgba(248, 250, 252, 0.82);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   transition:
     background 220ms ease,
     backdrop-filter 220ms ease,
+    -webkit-backdrop-filter 220ms ease,
     padding 220ms ease;
 }
 
