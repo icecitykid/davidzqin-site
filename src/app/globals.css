@@ -282,37 +282,59 @@ a {
 /*
  * Home header: two-layer glass pattern (mirrors .immersive-case__header).
  *
- * .hdr--home-shell  — outer sticky shell, always full body width (since the
- *                     component is rendered OUTSIDE .page). The glass bg is
- *                     applied here so it truly bleeds edge-to-edge even when
- *                     the page's max-width leaves side gaps on wide screens.
+ * .hdr--home-shell  — outer sticky shell, always full body width.
+ *                     Glass is driven by CSS Scroll-Driven Animations so it
+ *                     activates at exactly 1px of scroll with no JS hydration
+ *                     delay — renders identically on local and on Vercel.
  *
- * .hdr--home        — inner content bar, max-width + auto margins to keep
- *                     the logo/nav aligned with the page content below.
+ * .hdr--home        — inner content bar, max-width + auto margins.
  */
+
+/* Keyframes: transparent + full padding → frosted glass + collapsed padding.
+   Fired over a 0 → 1px scroll range so the switch is effectively instant. */
+@keyframes hdr-home-glass {
+  from {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding-top: 28px;
+  }
+  to {
+    background: rgba(241, 245, 249, 0.7);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    padding-top: 0;
+  }
+}
+
 .hdr--home-shell {
   position: sticky;
   top: 0;
   z-index: 40;
-  /* Restore the 28px page top-padding that previously sat above the header
-     when the header lived inside .page. This keeps the header content at
-     the same vertical position as About and the case-study header. */
   padding-top: 28px;
   background: transparent;
-  transition: background 220ms ease, backdrop-filter 220ms ease, -webkit-backdrop-filter 220ms ease, padding 220ms ease;
 }
 
-/* Once frosted, collapse the 28px breathing room so the glass strip sits
-   flush — same behaviour as the case study header. */
-.hdr--home-shell--scrolled {
-  padding-top: 0;
-  background: rgba(241, 245, 249, 0.7);
-  backdrop-filter: blur(14px) saturate(160%);
-  -webkit-backdrop-filter: blur(14px) saturate(160%);
+/* CSS Scroll-Driven Animation: supported Chrome 115+, Firefox 110+, Safari 18.1+ */
+@supports (animation-timeline: scroll()) {
+  .hdr--home-shell {
+    animation: hdr-home-glass linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0px 1px;
+  }
 }
 
-/* Home page: header is now outside .page, so .page no longer needs its own
-   top padding (the shell provides it). */
+/* Fallback for older browsers: always show the glass */
+@supports not (animation-timeline: scroll()) {
+  .hdr--home-shell {
+    background: rgba(241, 245, 249, 0.7);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    padding-top: 0;
+  }
+}
+
+/* Home page: header lives outside .page so no extra top padding needed. */
 .page--home {
   padding-top: 0;
 }
@@ -326,9 +348,7 @@ a {
 
 @media (prefers-reduced-motion: reduce) {
   .hdr--home-shell {
-    transition: none;
-  }
-  .hdr--home-shell--scrolled {
+    animation: none;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     background: rgba(241, 245, 249, 0.96);
@@ -1258,7 +1278,23 @@ a {
   }
 
   .hdr--home-shell {
-    padding-top: 20px;
+    padding-top: 20px; /* overrides desktop 28px default */
+  }
+
+  /* Mobile: redefine keyframes so the from-state uses 20px top padding */
+  @keyframes hdr-home-glass {
+    from {
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      padding-top: 20px;
+    }
+    to {
+      background: rgba(241, 245, 249, 0.7);
+      backdrop-filter: blur(14px) saturate(160%);
+      -webkit-backdrop-filter: blur(14px) saturate(160%);
+      padding-top: 0;
+    }
   }
 
   .about-root .page > .hdr--about {
