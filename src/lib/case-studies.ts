@@ -719,7 +719,7 @@ I designed and built the MVP solo using Figma + Cursor — a social betting app 
         },
       ],
       learnings: {
-        title: "What I learned",
+        title: "Key Lessons",
         paragraphs: [
           "AI speeds exploration, not decisions — the hard calls still need human judgment.",
           "Figma stays the anchor — as soon as Cursor became source of truth, decisions got noisy.",
