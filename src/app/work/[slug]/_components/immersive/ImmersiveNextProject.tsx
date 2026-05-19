@@ -49,6 +49,7 @@ export function ImmersiveNextProject({ currentSlug, next }: Props) {
             width={next.logoWidth ?? 854}
             height={next.logoHeight ?? 145}
             className="h-auto w-full max-w-[854px] transition-transform duration-dzq-med ease-dzq-out group-hover:scale-[1.02]"
+            quality={95}
             priority={false}
           />
         ) : (

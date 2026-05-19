@@ -60,6 +60,7 @@ export function ImmersiveMedia({ media, sizes, priority }: Props) {
       fill
       sizes={sizes}
       priority={priority}
+      quality={95}
       className={`${positionClass} ${fitClass}`}
     />
   );

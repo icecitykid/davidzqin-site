@@ -102,6 +102,7 @@ function SceneRenderer({ scene }: { scene: CaseStudyImmersiveScene }) {
                 alt={scene.phoneAlt}
                 fill
                 sizes="(max-width: 768px) 60vw, 410px"
+                quality={95}
                 className="object-cover"
               />
               {(scene.eyebrow || scene.headline || scene.quote) && (
@@ -206,6 +207,7 @@ export function CaseImmersive({ layout, title, slug }: Props) {
                 fill
                 priority
                 sizes="100vw"
+                quality={95}
                 className="object-cover object-center"
               />
               <div
@@ -273,6 +275,7 @@ export function CaseImmersive({ layout, title, slug }: Props) {
                     ? "h-[clamp(48px,7vw,106px)]"
                     : "h-[clamp(56px,9vw,143px)]"
                 } w-auto`}
+                quality={95}
                 priority
               />
             )}

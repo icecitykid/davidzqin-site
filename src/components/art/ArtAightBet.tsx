@@ -9,6 +9,7 @@ export function ArtAightBet() {
         alt=""
         fill
         sizes="(max-width: 900px) 100vw, min(1536px, 95vw)"
+        quality={95}
         className="object-cover"
       />
     </div>

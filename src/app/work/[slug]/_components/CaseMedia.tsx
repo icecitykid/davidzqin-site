@@ -55,6 +55,7 @@ export function CaseMedia({ media, priority, sizes }: Props) {
       fill
       priority={priority}
       sizes={sizes ?? "100vw"}
+      quality={95}
       className="object-cover"
     />
   );

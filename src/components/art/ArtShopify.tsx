@@ -25,6 +25,7 @@ export function ArtShopify() {
         alt=""
         fill
         sizes="(max-width: 900px) 100vw, 1808px"
+        quality={95}
         style={{ objectFit: "cover", borderRadius: 10 }}
       />
     </div>
