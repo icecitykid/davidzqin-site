@@ -47,7 +47,7 @@ export function ImmersiveFullWidthScreenshot({
     >
       <div
         ref={frameRef}
-        className="relative w-full overflow-hidden rounded-[60px] will-change-transform after:pointer-events-none after:absolute after:inset-0 after:rounded-[60px] after:ring-1 after:ring-inset after:ring-slate-100"
+        className="relative w-full overflow-hidden rounded-[40px] will-change-transform after:pointer-events-none after:absolute after:inset-0 after:rounded-[40px] after:ring-1 after:ring-inset after:ring-slate-100"
         style={{ aspectRatio: aspect }}
       >
         <ImmersiveMedia

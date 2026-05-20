@@ -94,7 +94,7 @@ function SceneRenderer({ scene }: { scene: CaseStudyImmersiveScene }) {
             style={{ aspectRatio: "1920 / 1080" }}
           >
             <div
-              className="absolute left-1/2 top-1/2 flex w-[clamp(280px,28vw,410px)] -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-[36px]"
+              className="absolute left-1/2 top-1/2 flex w-[clamp(280px,28vw,410px)] -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-[40px]"
               style={{ aspectRatio: "410 / 888" }}
             >
               {scene.phoneType === "video" ? (
@@ -253,7 +253,7 @@ export function CaseImmersive({ layout, title, slug }: Props) {
                   {heroPhones.map((m, i) => (
                     <div
                       key={i}
-                      className="relative w-[clamp(180px,18vw,293px)] overflow-hidden rounded-[20px]"
+                      className="relative w-[clamp(180px,18vw,293px)] overflow-hidden rounded-[40px]"
                       style={{ aspectRatio: heroPhoneAspect }}
                     >
                       <ImmersiveMedia

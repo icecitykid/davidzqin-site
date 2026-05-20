@@ -10,10 +10,10 @@ type Props = {
   /** CSS aspect ratio for each phone frame (e.g. `"440/872"`). Defaults to `"440/872"`. */
   aspect?: string;
   /**
-   * Per-phone corner radius in px. Defaults to `60` to preserve the
-   * original homepage-card / phone-trio look. The AthleteHQ 4-screen scroll
-   * (Figma `4138:1912`) overrides this to `40` to match the design system —
-   * every chrome-less screen in the AthleteHQ Figma uses `border-radius: 40`.
+   * Per-phone corner radius in px. Defaults to `40` to match the case-study
+   * design system — every chrome-less screen in the AthleteHQ + AightBet
+   * Figma uses `border-radius: 40`. Individual scenes can still override
+   * via the row `radius` prop or the per-item `radius` field on the media.
    */
   radius?: number;
   /**
@@ -34,7 +34,7 @@ type Props = {
 export function ImmersivePhoneRow({
   id,
   aspect = "440/872",
-  radius = 60,
+  radius = 40,
   border = false,
   media,
 }: Props) {

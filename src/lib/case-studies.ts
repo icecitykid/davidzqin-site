@@ -66,9 +66,8 @@ export type CaseStudyImmersiveMedia = {
   readonly objectFit?: "cover" | "contain";
   /**
    * Per-item override for the cell corner radius (px). Defaults to the row's
-   * `radius` (or 60). Use this when a single item in a phone row needs a
-   * different corner radius than its siblings — e.g. the sport-rep video
-   * sits at 70 while the still phones beside it stay at 60.
+   * `radius` (or 40). Use this when a single item in a phone row needs a
+   * different corner radius than its siblings.
    */
   readonly radius?: number;
 };
@@ -89,10 +88,9 @@ export type CaseStudyImmersiveScene =
        */
       readonly border?: boolean;
       /**
-       * Override the per-phone corner radius in px. Defaults to `60` to
-       * preserve the original homepage-card / phone-trio look. Set to `40`
-       * to match the 4-screen scroll (Figma `4138:1912`) — Figma uses 40px
-       * for every chrome-less screen in the AthleteHQ case.
+       * Override the per-phone corner radius in px. Defaults to `40` to
+       * match the case-study design system (Figma `4138:1912` and the
+       * AightBet equivalents) — every chrome-less phone screen uses 40px.
        */
       readonly radius?: number;
       readonly media: readonly CaseStudyImmersiveMedia[];
@@ -360,11 +358,10 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
         {
           kind: "phone-row",
           id: "scene-onboarding",
-          // Figma `4138:1912` (4-screen scroll): every still phone is a
-          // chrome-less 393×852 screen with rounded-[40], and the leftmost
-          // phone is a 418×856 device-frame mockup at rounded-[70] showing
-          // the screen recording. Cells use 393/852 so the still phones
-          // fill edge-to-edge; the video bumps its own radius to 70.
+          // Figma `4138:1912` (4-screen scroll): every phone is a
+          // chrome-less 393×852 screen with rounded-[40]. Cells use 393/852
+          // so the still phones fill edge-to-edge; the video uses the same
+          // 40px radius so its corners line up with its still siblings.
           aspect: "393/852",
           radius: 40,
           border: true,
@@ -374,14 +371,12 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
               // recording.mov". Cropped from the original .mov to strip
               // the iPhone bezels baked into the recording, then padded
               // with slate-100 on the sides so the screen content lands
-              // at the row's 393/852 wrapper aspect. Cell radius bumped
-              // to 70 (vs. 40 on the stills) to match the device-frame
-              // mockup in Figma.
+              // at the row's 393/852 wrapper aspect. Inherits the row's
+              // 40px radius to stay visually aligned with the stills.
               src: "/assets/davidzqin.com/athlete-app-home-view.mp4",
               type: "video",
               alt: "Athlete app home view — daily prompt and product picks",
               objectFit: "cover",
-              radius: 70,
             },
             {
               // Phone 2 (Figma 4138:3017) — Interests selection screen.
@@ -437,15 +432,11 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
             {
               // Re-encoded with slate-100 padding on the top/bottom (in
               // addition to the side gutters) so the video lands at the new
-              // 393/852 row aspect alongside the still phones.
+              // 393/852 row aspect alongside the still phones. Inherits the
+              // row's 40px corner radius to match the stills.
               src: "/assets/davidzqin.com/sport-rep-landing-screen-recording.mp4",
               type: "video",
               alt: "Sport rep portal landing screen recording",
-              // The screen recording reads a touch boxier than the still
-              // phones because its corners are clipped by the cell only
-              // (no rounded source frame). Bumping just this cell to 70
-              // brings the visible curvature in line with the stills.
-              radius: 70,
             },
             {
               src: "/assets/davidzqin.com/sport-rep-mobile-1-2.png",
@@ -477,15 +468,19 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
             "Beyond MVP, I worked with another Senior Designer to help envision what athlete-led commerce could look like — athlete picks, personal stories, and fundraisers stitched into the shopping experience. It gave Sports Marketing a north star to point engineering and leadership toward.",
         },
         {
-          kind: "phase-2-vision",
+          // Consumer-app splash video — rendered at its native 1504/962
+          // (desktop) aspect so the full frame plays, matching the Figma
+          // video section (`4138:3646`). The video already includes its
+          // own Nike + Raevyn Rogers profile content, so no overlay
+          // caption is layered on top.
+          kind: "full-width-screenshot",
           id: "scene-vision",
-          phoneSrc: "/assets/davidzqin.com/consumer-app-splash.mp4",
-          phoneType: "video",
-          phoneAlt: "AthleteHQ consumer app — splash and onboarding",
-          eyebrow: "Runner",
-          headline: "Raevyn Rogers",
-          quote:
-            "There's power in knowing what you're capable of and peace when you channel it. So we keep smiling.",
+          aspect: "1504/962",
+          media: {
+            src: "/assets/davidzqin.com/consumer-app-splash.mp4",
+            type: "video",
+            alt: "AthleteHQ consumer app — splash and onboarding",
+          },
         },
         {
           kind: "phone-row",

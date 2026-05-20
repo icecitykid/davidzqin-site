@@ -54,11 +54,14 @@ export function ImmersiveStickyNav({ sections }: Props) {
   };
 
   const linkClass = (isActive: boolean) => {
+    // Matches Figma `4144:1795`: inactive labels use the slate-400 design
+    // token (`--dzq-fg-3` = rgb(148, 163, 184) = #94A3B8); active label is
+    // fg-1 (#000) with an underline bar.
     const base =
       "relative block py-dzq-space-2 text-dzq-base font-dzq-medium transition-colors duration-300 ease-out after:absolute after:bottom-0 after:left-0 after:h-px after:bg-current after:transition-[right] after:duration-300 after:ease-out";
     const color = isActive
       ? "text-dzq-fg-1"
-      : "text-slate-500 hover:text-dzq-fg-1";
+      : "text-dzq-fg-3 hover:text-dzq-fg-1";
     const bar = isActive ? "after:right-0" : "after:right-full";
     return `${base} ${color} ${bar}`;
   };
