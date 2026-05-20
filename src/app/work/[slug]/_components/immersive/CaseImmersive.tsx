@@ -97,14 +97,27 @@ function SceneRenderer({ scene }: { scene: CaseStudyImmersiveScene }) {
               className="absolute left-1/2 top-1/2 flex w-[clamp(280px,28vw,410px)] -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-[36px]"
               style={{ aspectRatio: "410 / 888" }}
             >
-              <Image
-                src={scene.phoneSrc}
-                alt={scene.phoneAlt}
-                fill
-                sizes="(max-width: 768px) 60vw, 410px"
-                quality={95}
-                className="object-cover"
-              />
+              {scene.phoneType === "video" ? (
+                <video
+                  src={scene.phoneSrc}
+                  aria-label={scene.phoneAlt || undefined}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              ) : (
+                <Image
+                  src={scene.phoneSrc}
+                  alt={scene.phoneAlt}
+                  fill
+                  sizes="(max-width: 768px) 60vw, 410px"
+                  quality={95}
+                  className="object-cover"
+                />
+              )}
               {(scene.eyebrow || scene.headline || scene.quote) && (
                 <div className="absolute inset-x-[6.4%] bottom-[6.4%] flex flex-col gap-[clamp(8px,1vw,12px)] text-white">
                   {scene.eyebrow && (

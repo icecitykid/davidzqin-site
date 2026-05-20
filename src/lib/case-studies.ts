@@ -127,6 +127,12 @@ export type CaseStudyImmersiveScene =
       readonly id?: string;
       readonly phoneSrc: string;
       readonly phoneAlt: string;
+      /**
+       * Whether `phoneSrc` is an image (`<Image>`) or a video (autoplay,
+       * muted, loop, playsinline). Defaults to `"image"` for backwards
+       * compatibility with the original Phase 2 vision section.
+       */
+      readonly phoneType?: "image" | "video";
       /** Optional eyebrow / headline / quote rendered on top of the phone. */
       readonly eyebrow?: string;
       readonly headline?: string;
@@ -289,7 +295,7 @@ export const CASE_STUDIES: Record<CaseSlug, CaseStudy> = {
         { id: "results", label: "Results" },
       ],
       hero: {
-        backgroundSrc: "/assets/davidzqin.com/full-bleed-hero.png",
+        backgroundSrc: "/assets/davidzqin.com/athletehq-hero-background.png",
         backgroundAlt: "",
         logoSrc: "/assets/davidzqin.com/ahq-graphic-logo-2.png",
         logoAlt: "AthleteHQ logo",
@@ -456,11 +462,11 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
         {
           kind: "full-width-screenshot",
           id: "scene-webapp",
-          aspect: "1504/962",
+          aspect: "2824/2008",
           media: {
-            src: "/assets/davidzqin.com/consumer-app-splash.mp4",
-            type: "video",
-            alt: "AthleteHQ consumer app — splash and onboarding",
+            src: "/assets/davidzqin.com/sport-marketing-profile-splash.png",
+            type: "image",
+            alt: "Sport marketing portal — athlete profile splash",
           },
         },
         {
@@ -473,8 +479,9 @@ The app onboards an athlete in under 3 minutes — replacing a 45-minute Airtabl
         {
           kind: "phase-2-vision",
           id: "scene-vision",
-          phoneSrc: "/assets/davidzqin.com/nike-app-onboarding-1.png",
-          phoneAlt: "AthleteHQ Phase 2 — athlete-led commerce concept",
+          phoneSrc: "/assets/davidzqin.com/consumer-app-splash.mp4",
+          phoneType: "video",
+          phoneAlt: "AthleteHQ consumer app — splash and onboarding",
           eyebrow: "Runner",
           headline: "Raevyn Rogers",
           quote:
