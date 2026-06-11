@@ -125,9 +125,15 @@ body {
   color: var(--dzq-bg);
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+/* Wrapped in @layer base so Tailwind text-color utilities in @layer
+ * utilities can properly override on <a> elements. Without this, an
+ * unlayered `a { color: inherit }` would beat every layered text-* class
+ * via CSS cascade-layer ordering (unlayered > any named layer). */
+@layer base {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 *,
@@ -1405,4 +1411,111 @@ a {
   letter-spacing: -0.02em;
   color: #0a0a0a;
   z-index: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════
+ * Case study password wall
+ * ═══════════════════════════════════════════════════════════ */
+
+.case-gate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: var(--dzq-space-9) var(--dzq-page-pad);
+}
+
+.case-gate__panel {
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+.case-gate__eyebrow {
+  margin: 0 0 var(--dzq-space-3);
+  font-size: var(--dzq-text-xs);
+  font-weight: var(--dzq-weight-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dzq-fg-muted);
+}
+
+.case-gate__title {
+  margin: 0 0 var(--dzq-space-4);
+  font-family: var(--dzq-font-display);
+  font-size: var(--dzq-text-2xl);
+  font-weight: var(--dzq-weight-bold);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--dzq-fg-1);
+}
+
+.case-gate__copy {
+  margin: 0 auto var(--dzq-space-6);
+  max-width: 36ch;
+  font-size: var(--dzq-text-base);
+  line-height: 1.5;
+  color: var(--dzq-fg-2);
+}
+
+.case-gate__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dzq-space-3);
+  text-align: left;
+}
+
+.case-gate__label {
+  font-size: var(--dzq-text-sm);
+  font-weight: var(--dzq-weight-medium);
+  color: var(--dzq-fg-1);
+}
+
+.case-gate__input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  font-size: var(--dzq-text-base);
+  color: var(--dzq-fg-1);
+  background: var(--dzq-bg);
+  border: 1px solid var(--dzq-border-hl);
+  border-radius: var(--dzq-radius-md);
+  outline: none;
+  transition: border-color var(--dzq-dur-fast) var(--dzq-ease-out);
+}
+
+.case-gate__input:focus-visible {
+  border-color: var(--dzq-border-ink);
+}
+
+.case-gate__input[aria-invalid="true"] {
+  border-color: rgb(220, 38, 38);
+}
+
+.case-gate__error {
+  margin: 0;
+  font-size: var(--dzq-text-sm);
+  color: rgb(220, 38, 38);
+}
+
+.case-gate__submit {
+  margin-top: var(--dzq-space-2);
+  padding: 12px 16px;
+  font-size: var(--dzq-text-base);
+  font-weight: var(--dzq-weight-medium);
+  color: var(--dzq-bg);
+  background: var(--dzq-ink);
+  border: none;
+  border-radius: var(--dzq-radius-md);
+  cursor: pointer;
+  transition: opacity var(--dzq-dur-fast) var(--dzq-ease-out);
+}
+
+.case-gate__submit:hover {
+  opacity: 0.85;
+}
+
+.case-gate__submit:disabled {
+  opacity: 0.55;
+  cursor: default;
 }
