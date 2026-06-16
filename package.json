@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:case-auth": "node --test src/lib/case-auth.test.mjs"
+    "test:case-auth": "node --experimental-strip-types --test src/lib/case-auth.test.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
