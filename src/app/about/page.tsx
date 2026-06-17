@@ -65,7 +65,7 @@ export default function AboutPage() {
                 </p>
                 <p>Previously at Nike and Shopify.</p>
                 <p>
-                  Currently exploring how AI changes the way products are designed and
+                  Currently at SeatGeek. Concurrently exploring how AI changes the way products are designed and
                   built. The line between design, engineering, and product is blurring
                   and I&apos;m bullish for it.
                 </p>
