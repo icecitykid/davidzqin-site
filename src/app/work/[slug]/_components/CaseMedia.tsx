@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import type { CaseStudyMedia } from "@/lib/case-studies";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 type Props = {
   media: CaseStudyMedia;
@@ -18,17 +18,7 @@ type Props = {
  * suppressing video autoplay + preload.
  */
 export function CaseMedia({ media, priority, sizes }: Props) {
-  const [reducedMotion, setReducedMotion] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mql.matches);
-    const handler = (event: MediaQueryListEvent) =>
-      setReducedMotion(event.matches);
-    mql.addEventListener("change", handler);
-    return () => mql.removeEventListener("change", handler);
-  }, []);
+  const reducedMotion = useReducedMotion();
 
   if (!media.src) return null;
 

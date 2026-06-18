@@ -34,10 +34,7 @@ export function useActiveAnchor(options: UseActiveAnchorOptions): string | null 
 
     if (elements.length === 0) return;
 
-    if (!("IntersectionObserver" in window)) {
-      setActiveId(elements[0].id);
-      return;
-    }
+    if (!("IntersectionObserver" in window)) return;
 
     const io = new IntersectionObserver(
       (entries) => {
