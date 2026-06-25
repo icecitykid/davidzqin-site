@@ -12,7 +12,8 @@
 const encoder = new TextEncoder();
 
 function getPassword(): string | null {
-  return process.env.CASE_STUDY_PASSWORD ?? null;
+  const password = process.env.CASE_STUDY_PASSWORD?.trim();
+  return password ? password : null;
 }
 
 async function hmacHex(message: string, key: string): Promise<string> {
