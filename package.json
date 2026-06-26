@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:case-auth": "sh -c 'rm -rf .tmp/case-auth-test; tsc --target ES2022 --lib ES2022,DOM --module commonjs --moduleResolution node --strict --esModuleInterop --skipLibCheck --types node --outDir .tmp/case-auth-test --noEmit false src/lib/case-auth.ts test/case-auth.test.ts && node --test .tmp/case-auth-test/test/case-auth.test.js; status=$?; rm -rf .tmp/case-auth-test; exit $status'"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
