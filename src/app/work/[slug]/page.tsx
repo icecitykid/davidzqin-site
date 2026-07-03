@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { cookies } from "next/headers";
+import { notFound, redirect } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { HeroDecorAightBet } from "@/components/art/HeroDecorAightBet";
 import { HeroDecorAthleteHQ } from "@/components/art/HeroDecorAthleteHQ";
+import { verifyUnlockToken } from "@/lib/case-auth";
 import { getCaseStudy } from "@/lib/case-studies";
+import { isProtectedCase, unlockCookieName } from "@/lib/protected-cases";
 import { CASE_SLUGS, isCaseSlug } from "@/lib/work";
 import { CaseCredits } from "./_components/CaseCredits";
 import { CaseHero } from "./_components/CaseHero";
@@ -52,6 +55,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function WorkCasePage({ params }: Props) {
   const { slug } = await params;
   if (!isCaseSlug(slug)) notFound();
+
+  if (isProtectedCase(slug)) {
+    const cookieStore = await cookies();
+    const token = cookieStore.get(unlockCookieName(slug))?.value;
+    if (!(await verifyUnlockToken(slug, token))) {
+      redirect(`/work/${slug}/unlock`);
+    }
+  }
 
   const study = getCaseStudy(slug);
 
