@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
 
@@ -33,20 +34,11 @@ export function StatBlock({
   const startedRef = useRef(false);
   const [displayValue, setDisplayValue] = useState(0);
   const [descriptorVisible, setDescriptorVisible] = useState(false);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    if (!start || startedRef.current) return;
+    if (!start || reduceMotion || startedRef.current) return;
     startedRef.current = true;
-
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (reduceMotion) {
-      setDisplayValue(endValue);
-      setDescriptorVisible(true);
-      return;
-    }
 
     descTimerRef.current = window.setTimeout(() => {
       setDescriptorVisible(true);
@@ -68,9 +60,12 @@ export function StatBlock({
       if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
       if (descTimerRef.current !== null) clearTimeout(descTimerRef.current);
     };
-  }, [start, endValue, duration]);
+  }, [start, endValue, duration, reduceMotion]);
 
-  const formatted = displayValue.toFixed(decimals);
+  const renderedDisplayValue = start && reduceMotion ? endValue : displayValue;
+  const descriptorIsVisible =
+    (start && reduceMotion) || descriptorVisible;
+  const formatted = renderedDisplayValue.toFixed(decimals);
   const accessibleValue = `${prefix}${endValue.toFixed(decimals)}${suffix}${
     trailingText ? ` ${trailingText}` : ""
   }`;
@@ -91,7 +86,7 @@ export function StatBlock({
 
       <p
         className={`m-0 text-[clamp(18px,2vw,24px)] leading-snug text-[#334155] transition-opacity duration-dzq-slow ease-dzq-out ${
-          descriptorVisible ? "opacity-100" : "opacity-0"
+          descriptorIsVisible ? "opacity-100" : "opacity-0"
         }`}
       >
         {descriptor}
