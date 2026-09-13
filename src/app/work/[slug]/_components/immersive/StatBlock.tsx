@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
 
@@ -31,22 +32,19 @@ export function StatBlock({
   const frameRef = useRef<number | null>(null);
   const descTimerRef = useRef<number | null>(null);
   const startedRef = useRef(false);
-  const [displayValue, setDisplayValue] = useState(0);
+  const reduceMotion = usePrefersReducedMotion();
+  const [animatedDisplayValue, setAnimatedDisplayValue] = useState(0);
   const [descriptorVisible, setDescriptorVisible] = useState(false);
 
   useEffect(() => {
     if (!start || startedRef.current) return;
-    startedRef.current = true;
-
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
 
     if (reduceMotion) {
-      setDisplayValue(endValue);
-      setDescriptorVisible(true);
+      startedRef.current = true;
       return;
     }
+
+    startedRef.current = true;
 
     descTimerRef.current = window.setTimeout(() => {
       setDescriptorVisible(true);
@@ -55,7 +53,7 @@ export function StatBlock({
     const startTime = performance.now();
     const tick = (now: number) => {
       const progress = Math.min((now - startTime) / duration, 1);
-      setDisplayValue(easeOutQuart(progress) * endValue);
+      setAnimatedDisplayValue(easeOutQuart(progress) * endValue);
       if (progress < 1) {
         frameRef.current = requestAnimationFrame(tick);
       } else {
@@ -68,8 +66,10 @@ export function StatBlock({
       if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
       if (descTimerRef.current !== null) clearTimeout(descTimerRef.current);
     };
-  }, [start, endValue, duration]);
+  }, [start, endValue, duration, reduceMotion]);
 
+  const displayValue = reduceMotion && start ? endValue : animatedDisplayValue;
+  const isDescriptorVisible = (reduceMotion && start) || descriptorVisible;
   const formatted = displayValue.toFixed(decimals);
   const accessibleValue = `${prefix}${endValue.toFixed(decimals)}${suffix}${
     trailingText ? ` ${trailingText}` : ""
@@ -91,7 +91,7 @@ export function StatBlock({
 
       <p
         className={`m-0 text-[clamp(18px,2vw,24px)] leading-snug text-[#334155] transition-opacity duration-dzq-slow ease-dzq-out ${
-          descriptorVisible ? "opacity-100" : "opacity-0"
+          isDescriptorVisible ? "opacity-100" : "opacity-0"
         }`}
       >
         {descriptor}

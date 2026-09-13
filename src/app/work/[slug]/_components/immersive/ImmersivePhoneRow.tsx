@@ -39,18 +39,15 @@ export function ImmersivePhoneRow({
   media,
 }: Props) {
   const sectionRef = useRef<HTMLElement>(null);
-  const itemsRef = useRef<HTMLDivElement[]>([]);
-  itemsRef.current = [];
-
-  const setItem = (el: HTMLDivElement | null) => {
-    if (el && !itemsRef.current.includes(el)) itemsRef.current.push(el);
-  };
 
   useGSAP(
     () => {
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       const isMobile = window.matchMedia("(max-width: 767.98px)").matches;
-      const items = itemsRef.current;
+      const items = gsap.utils.toArray<HTMLDivElement>(
+        "[data-immersive-phone-item]",
+        sectionRef.current,
+      );
       if (items.length === 0) return;
 
       if (isMobile) {
@@ -121,7 +118,7 @@ export function ImmersivePhoneRow({
         {media.map((item, i) => (
           <div
             key={i}
-            ref={setItem}
+            data-immersive-phone-item
             className={`relative min-w-0 w-full overflow-hidden rounded-[var(--phone-radius)] bg-slate-100 will-change-transform after:pointer-events-none after:absolute after:inset-0 after:rounded-[var(--phone-radius)] after:ring-1 after:ring-inset ${
               border ? "after:ring-slate-300" : "after:ring-slate-100"
             }`}
