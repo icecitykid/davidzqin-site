@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test:case-auth": "node --test scripts/test-case-auth.mjs",
     "lint": "eslint"
   },
   "dependencies": {
