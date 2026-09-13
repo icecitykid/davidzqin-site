@@ -689,7 +689,7 @@ I designed and built the MVP solo using Figma + Cursor — a social betting app 
           aspect: "486/1011",
           media: [
             {
-              src: "/assets/davidzqin.com/aightbet-create-bet-v1.mov",
+              src: "/assets/davidzqin.com/aightbet-create-bet-v1.mp4",
               type: "video",
               alt: "AightBet create-bet flow — early prototype",
             },
@@ -707,7 +707,7 @@ I designed and built the MVP solo using Figma + Cursor — a social betting app 
           aspect: "486/1056",
           media: [
             {
-              src: "/assets/davidzqin.com/aightbet-create-bet-live.mov",
+              src: "/assets/davidzqin.com/aightbet-create-bet-live.mp4",
               type: "video",
               alt: "AightBet create-bet flow — live build",
             },
