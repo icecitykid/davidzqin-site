@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "test:case-auth": "node --experimental-transform-types --test src/lib/case-auth.test.mjs",
     "start": "next start",
     "lint": "eslint"
   },
